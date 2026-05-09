@@ -1,0 +1,263 @@
+/* ========================
+   GitHub Explorer
+   ======================== */
+
+.github-search {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.github-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  color: #e6edf3;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.github-input:focus {
+  border-color: #58a6ff;
+}
+
+.github-input::placeholder {
+  color: #484f58;
+}
+
+.github-btn {
+  padding: 0.75rem 1.5rem;
+  background: #58a6ff;
+  color: #0d1117;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.github-btn:hover {
+  background: #79b8ff;
+  transform: translateY(-1px);
+}
+
+/* Empty / Loading / Error states */
+.github-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 4rem 1rem;
+  text-align: center;
+  color: #8b949e;
+}
+
+.empty-icon {
+  font-size: 3rem;
+}
+
+.github-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem 0;
+  color: #8b949e;
+}
+
+.github-error {
+  padding: 1rem;
+  background: rgba(248, 81, 73, 0.1);
+  border: 1px solid rgba(248, 81, 73, 0.2);
+  border-radius: 10px;
+  color: #f85149;
+  font-size: 0.95rem;
+}
+
+/* ---- Profile Card ---- */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.profile-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid #30363d;
+  flex-shrink: 0;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e6edf3;
+  margin-bottom: 0.25rem;
+}
+
+.profile-bio {
+  font-size: 0.9rem;
+  color: #8b949e;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.profile-stat {
+  font-size: 0.85rem;
+  color: #8b949e;
+}
+
+.profile-stat strong {
+  color: #e6edf3;
+  font-weight: 600;
+}
+
+/* ---- Repos Section ---- */
+.repos-section {
+  margin-top: 0.5rem;
+}
+
+.repos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.repo-filter {
+  padding: 0.5rem 0.85rem;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  color: #e6edf3;
+  font-size: 0.85rem;
+  outline: none;
+  min-width: 200px;
+  transition: border-color 0.2s ease;
+}
+
+.repo-filter:focus {
+  border-color: #58a6ff;
+}
+
+.repo-filter::placeholder {
+  color: #484f58;
+}
+
+.repos-empty {
+  padding: 2rem;
+  text-align: center;
+  color: #8b949e;
+}
+
+.repos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+/* ---- Repo Card ---- */
+.repo-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 1.25rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.repo-card:hover {
+  border-color: #58a6ff;
+  transform: translateY(-2px);
+}
+
+.repo-name a {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #58a6ff;
+}
+
+.repo-name a:hover {
+  text-decoration: underline;
+}
+
+.repo-desc {
+  font-size: 0.85rem;
+  color: #8b949e;
+  line-height: 1.4;
+  /* Clamp to 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.repo-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #8b949e;
+}
+
+.repo-language {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.language-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #58a6ff;
+  display: inline-block;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-stats {
+    justify-content: center;
+  }
+
+  .repos-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .repo-filter {
+    min-width: unset;
+  }
+
+  .repos-grid {
+    grid-template-columns: 1fr;
+  }
+}
