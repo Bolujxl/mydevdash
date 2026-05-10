@@ -96,6 +96,13 @@ function WeatherWidget() {
           </div>
           <p className="weather-city">{areaName}</p>
           <p className="weather-desc">{description}</p>
+          {(feelsLike || humidity || windSpeed) && (
+            <div className="weather-details">
+              {feelsLike !== undefined && <span>Feels like {feelsLike}°</span>}
+              {humidity && <span>{humidity}% humidity</span>}
+              {windSpeed && <span>{windSpeed} km/h</span>}
+            </div>
+          )}
         </div>
       )}
     </div>
