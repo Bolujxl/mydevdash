@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react'
-import { Search, Loader2, User, MapPin, Users, FolderGit2 } from 'lucide-react'
+beinimport { useState, useMemo } from 'react'
+import { Search, Loader2, MapPin, Users, FolderGit2, Globe } from 'lucide-react'
 import useFetch from '../hooks/useFetch'
 import RepoCard from '../components/RepoCard'
 import '../styles/GitHub.css'
@@ -47,7 +47,10 @@ function GitHub() {
 
   return (
     <div className="github-page">
-      <h1 className="page-title">GitHub Explorer</h1>
+      <h1 className="page-title">
+        <Globe size={22} className="page-title-icon" />
+        GitHub Explorer
+      </h1>
 
       <form className="github-search" onSubmit={handleSearch}>
         <Search size={18} className="github-search-icon" />
