@@ -13,12 +13,14 @@ function App() {
       <div className="app">
         <Navbar />
         <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/github" element={<GitHub />} />
-            <Route path="/tasks" element={<Tasks />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="content-wrapper">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/github" element={<GitHub />} />
+              <Route path="/tasks" element={<Tasks />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </main>
       </div>
     </ErrorBoundary>
