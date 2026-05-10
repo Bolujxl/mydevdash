@@ -1,5 +1,5 @@
 /* ========================
-   Contribution Chart
+   Contribution Heatmap
    ======================== */
 
 .chart-card {
@@ -21,7 +21,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
 }
 
@@ -40,10 +40,6 @@
   font-weight: 500;
 }
 
-.chart-container {
-  width: 100%;
-}
-
 .chart-empty {
   text-align: center;
   color: var(--text-secondary);
@@ -51,37 +47,74 @@
   padding: 2rem 0;
 }
 
-/* Tooltip */
-.chart-tooltip {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-primary);
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem;
+/* ---- Heatmap ---- */
+.heatmap-row {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  gap: 0.65rem;
+  position: relative;
 }
 
-.chart-tooltip-label {
-  font-size: 0.75rem;
+.heatmap-cells {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heatmap-cell {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  transition: transform 0.12s ease;
+}
+
+.heatmap-cell.has-data:hover {
+  transform: scale(1.35);
+}
+
+.heatmap-cell.heatmap-int-0 { background: var(--border-secondary); }
+.heatmap-cell.heatmap-int-1 { background: rgba(88, 166, 255, 0.18); }
+.heatmap-cell.heatmap-int-2 { background: rgba(88, 166, 255, 0.35); }
+.heatmap-cell.heatmap-int-3 { background: rgba(88, 166, 255, 0.55); }
+.heatmap-cell.heatmap-int-4 { background: var(--accent); }
+
+[data-theme="light"] .heatmap-cell.heatmap-int-1 { background: rgba(9, 105, 218, 0.12); }
+[data-theme="light"] .heatmap-cell.heatmap-int-2 { background: rgba(9, 105, 218, 0.28); }
+[data-theme="light"] .heatmap-cell.heatmap-int-3 { background: rgba(9, 105, 218, 0.5); }
+[data-theme="light"] .heatmap-cell.heatmap-int-4 { background: var(--accent); }
+
+/* Tooltip */
+.heatmap-tooltip {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+
+.heatmap-tooltip-label {
   color: var(--text-secondary);
   font-weight: 500;
 }
 
-.chart-tooltip-value {
-  font-size: 0.85rem;
+.heatmap-tooltip-value {
   color: var(--text-primary);
   font-weight: 700;
 }
 
-/* Recharts overrides */
-.recharts-text {
-  font-family: 'Inter', sans-serif;
+/* Legend */
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
 }
 
-@media (max-width: 768px) {
-  .chart-container {
-    height: 140px;
-  }
+.heatmap-legend .heatmap-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
 }
