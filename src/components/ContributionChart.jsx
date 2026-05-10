@@ -62,7 +62,7 @@ function ContributionChart({ events }) {
         <p className="chart-empty">No activity in the past 14 days.</p>
       ) : (
         <div className="chart-container">
-          <ResponsiveContainer width="100%" height={180}>
+          <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={data} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
