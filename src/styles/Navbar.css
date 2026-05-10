@@ -103,10 +103,12 @@
   letter-spacing: -0.01em;
 }
 
-.sidebar-link:hover {
-  color: var(--text-primary);
-  background: var(--neutral-bg);
-  text-decoration: none;
+@media (hover: hover) {
+  .sidebar-link:hover {
+    color: var(--text-primary);
+    background: var(--neutral-bg);
+    text-decoration: none;
+  }
 }
 
 .sidebar-link.active {
@@ -133,8 +135,10 @@
   transition: transform 0.15s ease;
 }
 
-.sidebar-link:hover svg {
-  transform: translateX(1px);
+@media (hover: hover) {
+  .sidebar-link:hover svg {
+    transform: translateX(1px);
+  }
 }
 
 .sidebar-link.active svg {
@@ -168,9 +172,11 @@
   letter-spacing: -0.01em;
 }
 
-.sidebar-theme-btn:hover {
-  color: var(--text-primary);
-  background: var(--neutral-bg);
+@media (hover: hover) {
+  .sidebar-theme-btn:hover {
+    color: var(--text-primary);
+    background: var(--neutral-bg);
+  }
 }
 
 .sidebar-theme-btn svg {
@@ -197,9 +203,11 @@
   transition: all 0.15s ease;
 }
 
-.sidebar-hamburger:hover {
-  background: var(--bg-hover);
-  border-color: var(--text-tertiary);
+@media (hover: hover) {
+  .sidebar-hamburger:hover {
+    background: var(--bg-hover);
+    border-color: var(--text-tertiary);
+  }
 }
 
 /* ---- Close button (mobile) ---- */
@@ -235,9 +243,11 @@
     transition: all 0.15s ease;
   }
 
-  .sidebar-close:hover {
-    color: var(--text-primary);
-    background: var(--bg-hover);
+  @media (hover: hover) {
+    .sidebar-close:hover {
+      color: var(--text-primary);
+      background: var(--bg-hover);
+    }
   }
 
   .sidebar {

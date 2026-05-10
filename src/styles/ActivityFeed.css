@@ -80,8 +80,14 @@
   position: relative;
 }
 
-.activity-item:hover {
-  background: var(--bg-hover);
+@media (hover: hover) {
+  .activity-item:hover {
+    background: var(--bg-hover);
+  }
+
+  .activity-message a:hover {
+    text-decoration: underline;
+  }
 }
 
 /* ---- Icon ---- */

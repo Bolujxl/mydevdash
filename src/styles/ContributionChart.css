@@ -12,8 +12,14 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.chart-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px var(--accent-ring);
+@media (hover: hover) {
+  .chart-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px var(--accent-ring);
+  }
+
+  .heatmap-cell.has-data:hover {
+    transform: scale(1.35);
+  }
 }
 
 .chart-header {

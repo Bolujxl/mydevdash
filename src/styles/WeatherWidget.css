@@ -60,9 +60,11 @@
   white-space: nowrap;
 }
 
-.weather-btn:hover {
-  background: var(--border-primary);
-  border-color: var(--text-tertiary);
+@media (hover: hover) {
+  .weather-btn:hover {
+    background: var(--border-primary);
+    border-color: var(--text-tertiary);
+  }
 }
 
 .weather-loading {

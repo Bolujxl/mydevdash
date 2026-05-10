@@ -40,9 +40,11 @@
   transition: all 0.2s ease;
 }
 
-.task-add-btn:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .task-add-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
 }
 
 /* ---- Filter Tabs ---- */
@@ -64,9 +66,11 @@
   transition: all 0.2s ease;
 }
 
-.filter-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--text-tertiary);
+@media (hover: hover) {
+  .filter-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--text-tertiary);
+  }
 }
 
 .filter-btn.active {
@@ -119,8 +123,10 @@
   transition: border-color 0.2s ease, transform 0.15s ease;
 }
 
-.task-item:hover {
-  box-shadow: inset 0 0 0 2px var(--accent-ring);
+@media (hover: hover) {
+  .task-item:hover {
+    box-shadow: inset 0 0 0 2px var(--accent-ring);
+  }
 }
 
 .task-item.done {
@@ -189,8 +195,10 @@
   flex-shrink: 0;
 }
 
-.task-delete:hover {
-  color: var(--danger);
+@media (hover: hover) {
+  .task-delete:hover {
+    color: var(--danger);
+  }
 }
 
 /* Mobile */

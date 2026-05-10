@@ -5,7 +5,6 @@
 .app {
   min-height: 100vh;
   display: flex;
-  background: var(--bg-root);
 }
 
 .main-content {
@@ -13,28 +12,12 @@
   margin-left: var(--sidebar-width);
   display: flex;
   justify-content: center;
-  padding: 2.25rem 2.5rem;
-  min-height: 100vh;
+  padding: 2rem;
 }
 
 .content-wrapper {
-  max-width: 1140px;
+  max-width: 1200px;
   width: 100%;
-}
-
-/* ---- Page Header ---- */
-.page-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  gap: 1rem;
-}
-
-.page-header-left {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
 }
 
 /* ---- Shared Spinner ---- */
@@ -69,72 +52,33 @@
   flex-shrink: 0;
 }
 
-.page-subtitle {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-  margin-bottom: 1.75rem;
-  margin-top: 0.25rem;
-}
-
 .section-title {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--text-primary);
-  letter-spacing: -0.01em;
 }
 
 .widget-title {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--text-primary);
-  letter-spacing: -0.01em;
-  margin-bottom: 0;
+  margin-bottom: 1rem;
 }
 
-/* ---- View-All Link ---- */
-.view-all-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--accent);
-  transition: color 0.15s ease, gap 0.15s ease;
-  text-decoration: none;
+@supports (font-variation-settings: normal) {
+  .page-title,
+  .widget-title,
+  .section-title {
+    font-variation-settings: 'wght' 600;
+  }
 }
 
-.view-all-link:hover {
-  color: var(--accent-hover);
-  gap: 0.4rem;
-  text-decoration: none;
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 4rem 1rem 1.5rem 1rem;
+  }
 }
-
-/* ---- Surface Card (shared) ---- */
-.surface-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-secondary);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-}
-
-/* ---- Badge / Tag ---- */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-pill);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
-.badge--blue   { background: var(--accent-bg);  color: var(--accent);  }
-.badge--green  { background: var(--success-bg); color: var(--success); }
-.badge--purple { background: var(--purple-bg);  color: var(--purple);  }
-.badge--amber  { background: var(--warning-bg); color: var(--warning); }
-.badge--danger { background: var(--danger-bg);  color: var(--danger);  }
 
 /* ---- 404 Page ---- */
 .not-found {
@@ -151,7 +95,6 @@
   font-size: 7rem;
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -0.05em;
   background: linear-gradient(135deg, var(--accent), var(--purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -160,35 +103,39 @@
 
 .not-found h2 {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-secondary);
-  letter-spacing: -0.02em;
 }
 
 .not-found p {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 1rem;
   max-width: 400px;
 }
 
 .home-btn {
   margin-top: 1.5rem;
-  padding: 0.75rem 2.25rem;
+  padding: 0.75rem 2rem;
   background: var(--accent);
   color: #ffffff;
   border: none;
-  border-radius: var(--radius-pill);
-  font-size: 0.9rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  letter-spacing: -0.01em;
 }
 
-.home-btn:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-accent);
+@media (hover: hover) {
+  .home-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(88, 166, 255, 0.12);
+  }
+}
+
+.home-btn:active {
+  transform: translateY(0);
 }
 
 /* ---- Error Boundary ---- */
@@ -224,23 +171,17 @@
   background: var(--accent);
   color: #ffffff;
   border: none;
-  border-radius: var(--radius-pill);
-  font-size: 0.9rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.error-boundary-card button:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-accent);
-}
-
-/* ---- Mobile ---- */
-@media (max-width: 768px) {
-  .main-content {
-    margin-left: 0;
-    padding: 4.5rem 1.25rem 2rem;
+@media (hover: hover) {
+  .error-boundary-card button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(88, 166, 255, 0.12);
   }
 }

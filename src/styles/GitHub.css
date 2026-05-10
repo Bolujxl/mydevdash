@@ -47,9 +47,11 @@
   transition: all 0.2s ease;
 }
 
-.github-btn:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .github-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
 }
 
 .github-empty {
@@ -227,9 +229,15 @@
   gap: 0.5rem;
 }
 
-.repo-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px var(--accent-ring);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .repo-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px var(--accent-ring);
+    transform: translateY(-1px);
+  }
+
+  .repo-name a:hover {
+    text-decoration: underline;
+  }
 }
 
 .repo-name a {
