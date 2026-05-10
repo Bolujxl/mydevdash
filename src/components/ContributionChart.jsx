@@ -11,7 +11,7 @@ function buildChartData(events) {
 
   const days = []
   const now = new Date()
-  for (let i = 13; i >= 0; i--) {
+  for (let i = 29; i >= 0; i--) {
     const d = new Date(now)
     d.setDate(d.getDate() - i)
     days.push({
@@ -55,7 +55,7 @@ function ContributionChart({ events }) {
         <h2 className="chart-title">
           <Activity size={16} /> Activity Pulse
         </h2>
-        <span className="chart-subtitle">Last 14 days · {total} events</span>
+        <span className="chart-subtitle">Last 30 days · {total} events</span>
       </div>
 
       {!hasData ? (
@@ -76,6 +76,7 @@ function ContributionChart({ events }) {
                 axisLine={false}
                 tickLine={false}
                 tick={{ fontSize: 11, fill: 'var(--text-tertiary)' }}
+                interval={2}
                 dy={8}
               />
               <YAxis

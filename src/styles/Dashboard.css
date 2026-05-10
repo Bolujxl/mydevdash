@@ -514,6 +514,11 @@
   position: relative;
 }
 
+.bento-dashboard .chart-card {
+  grid-column: span 12;
+  margin-top: 0;
+}
+
 /* ---- Dash Section Card ---- */
 .dash-section {
   background: var(--bg-surface);
