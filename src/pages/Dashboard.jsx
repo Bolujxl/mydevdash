@@ -71,16 +71,16 @@ function Dashboard() {
 
   const contributionStats = useMemo(() => {
     if (!Array.isArray(events)) return null
-    let commits = 0
+    let pushes = 0
     let prs = 0
     let issues = 0
     for (const e of events) {
-      if (e.type === 'PushEvent') commits += e.payload?.commits?.length || e.payload?.size || 0
+      if (e.type === 'PushEvent') pushes++
       if (e.type === 'PullRequestEvent' && e.payload?.action === 'opened') prs++
       if (e.type === 'IssuesEvent' && e.payload?.action === 'opened') issues++
     }
     const parts = []
-    if (commits) parts.push(`${commits} commits`)
+    if (pushes) parts.push(`${pushes} pushes`)
     if (prs) parts.push(`${prs} PRs`)
     if (issues) parts.push(`${issues} issues`)
     return parts.length ? `Recent activity: ${parts.join(' · ')}` : null

@@ -47,8 +47,11 @@ function eventMessage(event) {
 
   switch (event.type) {
     case 'PushEvent': {
-      const count = event.payload?.commits?.length || event.payload?.size || 0
-      return <span>pushed <strong>{count}</strong> commit{count !== 1 ? 's' : ''} to <a href={url} target="_blank" rel="noopener noreferrer">{repo}</a></span>
+      const count = event.payload?.commits?.length ?? event.payload?.size
+      if (count) {
+        return <span>pushed <strong>{count}</strong> commit{count !== 1 ? 's' : ''} to <a href={url} target="_blank" rel="noopener noreferrer">{repo}</a></span>
+      }
+      return <span>pushed to <a href={url} target="_blank" rel="noopener noreferrer">{repo}</a></span>
     }
     case 'PullRequestEvent': {
       const action = event.payload?.action || 'updated'
