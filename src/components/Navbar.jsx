@@ -33,7 +33,7 @@ function Navbar() {
           </div>
           <div>
             <div className="sidebar-title">DevDash</div>
-            <div className="sidebar-version">v1.0 · beta</div>
+            <div className="sidebar-version">v1.0</div>
           </div>
         </div>
 

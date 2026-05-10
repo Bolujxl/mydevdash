@@ -139,143 +139,153 @@ function Dashboard() {
 
       {profile ? (
         <>
-          <div className="hero-card">
-            <div className="hero-avatar-wrapper">
-              <img
-                src={profile.avatar_url}
-                alt={profile.login}
-                className="hero-avatar"
-              />
-            </div>
-            <div className="hero-body">
-              <div className="hero-top">
-                <div>
-                  <h1 className="hero-greeting">
-                    Good {getGreeting()}, {profile.name || profile.login}
-                  </h1>
-                  <p className="hero-login">@{profile.login}</p>
+          <div className="bento-dashboard">
+            <div className="hero-card bento-hero">
+              <div className="hero-avatar-wrapper">
+                <img
+                  src={profile.avatar_url}
+                  alt={profile.login}
+                  className="hero-avatar"
+                />
+                <div className="status-dot">
+                  <div className="status-dot-ping"></div>
                 </div>
-                <div className="hero-actions">
-                  <span className="gh-badge" title="Change user" onClick={handleChangeUsername}>
-                    {savedUsername}
-                    <span className="gh-badge-x">×</span>
+              </div>
+              <div className="hero-body">
+                <div className="hero-top">
+                  <div className="cli-header">
+                    <div className="cli-dots">
+                      <span className="cli-dot red"></span>
+                      <span className="cli-dot yellow"></span>
+                      <span className="cli-dot green"></span>
+                    </div>
+                    <span className="cli-path">~/{profile.login.toLowerCase()}</span>
+                  </div>
+                  <div>
+                    <h1 className="hero-greeting">
+                      Good {getGreeting()}, <span className="highlight-name">{profile.name || profile.login}</span>
+                    </h1>
+                    <p className="hero-login">@{profile.login}</p>
+                  </div>
+                  <div className="hero-actions">
+                    <span className="gh-badge" title="Change user" onClick={handleChangeUsername}>
+                      {savedUsername}
+                      <span className="gh-badge-x">×</span>
+                    </span>
+                    <a
+                      href={profile.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hero-gh-link"
+                    >
+                      GitHub <ChevronRight size={14} />
+                    </a>
+                  </div>
+                  
+                  <div className="hero-inline-stats">
+                    <div className="inline-stat">
+                      <span className="stat-val">{profile.public_repos}</span> Repos
+                    </div>
+                    <span className="stat-divider"></span>
+                    <div className="inline-stat">
+                      <span className="stat-val">{profile.followers}</span> Followers
+                    </div>
+                    <span className="stat-divider"></span>
+                    <div className="inline-stat">
+                      <span className="stat-val">{profile.following}</span> Following
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bento-weather">
+              <WeatherWidget />
+            </div>
+
+            <div className="stat-cards-row bento-stats">
+              <div className="stat-card stat-card--green">
+                <div className="stat-card-icon-wrap">
+                  <CheckCircle2 size={20} />
+                </div>
+                <div className="stat-card-body">
+                  <span className="stat-card-value">{completedCount}</span>
+                  <span className="stat-card-label">Tasks done</span>
+                </div>
+              </div>
+              <div className="stat-card stat-card--blue">
+                <div className="stat-card-icon-wrap">
+                  <Star size={20} />
+                </div>
+                <div className="stat-card-body">
+                  <span className="stat-card-value">{totalStars.toLocaleString()}</span>
+                  <span className="stat-card-label">Total stars</span>
+                </div>
+              </div>
+              <div className="stat-card stat-card--purple">
+                <div className="stat-card-icon-wrap">
+                  <FolderGit2 size={20} />
+                </div>
+                <div className="stat-card-body">
+                  <span className="stat-card-value">
+                    {reposLoading ? '...' : uniqueLanguages}
                   </span>
+                  <span className="stat-card-label">Languages used</span>
+                </div>
+              </div>
+              <div className="stat-card stat-card--amber">
+                <div className="stat-card-icon-wrap">
+                  <GitFork size={20} />
+                </div>
+                <div className="stat-card-body">
+                  <span className="stat-card-value">{totalForks.toLocaleString()}</span>
+                  <span className="stat-card-label">Total forks</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="dash-section bento-repos">
+              <div className="dash-section-header">
+                <h2 className="widget-title">
+                  <Star size={16} /> Recent Repositories
+                </h2>
+              </div>
+              <div className="top-repos-grid">
+                {recentRepos.map((repo) => (
                   <a
-                    href={profile.html_url}
+                    key={repo.id}
+                    href={repo.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hero-gh-link"
+                    className="top-repo-card"
                   >
-                    GitHub <ChevronRight size={14} />
-                  </a>
-                </div>
-              </div>
-              <div className="hero-numbers">
-                <div className="hero-number">
-                  <FolderGit2 size={16} />
-                  <span>{profile.public_repos}</span>
-                  <small>Repos</small>
-                </div>
-                <div className="hero-number">
-                  <Users size={16} />
-                  <span>{profile.followers}</span>
-                  <small>Followers</small>
-                </div>
-                <div className="hero-number">
-                  <Users size={16} />
-                  <span>{profile.following}</span>
-                  <small>Following</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="stat-cards-row">
-            <div className="stat-card stat-card--green">
-              <div className="stat-card-icon-wrap">
-                <CheckCircle2 size={20} />
-              </div>
-              <div className="stat-card-body">
-                <span className="stat-card-value">{completedCount}</span>
-                <span className="stat-card-label">Tasks done</span>
-              </div>
-            </div>
-            <div className="stat-card stat-card--blue">
-              <div className="stat-card-icon-wrap">
-                <Star size={20} />
-              </div>
-              <div className="stat-card-body">
-                <span className="stat-card-value">{totalStars.toLocaleString()}</span>
-                <span className="stat-card-label">Total stars</span>
-              </div>
-            </div>
-            <div className="stat-card stat-card--purple">
-              <div className="stat-card-icon-wrap">
-                <FolderGit2 size={20} />
-              </div>
-              <div className="stat-card-body">
-                <span className="stat-card-value">
-                  {reposLoading ? '...' : uniqueLanguages}
-                </span>
-                <span className="stat-card-label">Languages used</span>
-              </div>
-            </div>
-            <div className="stat-card stat-card--amber">
-              <div className="stat-card-icon-wrap">
-                <GitFork size={20} />
-              </div>
-              <div className="stat-card-body">
-                <span className="stat-card-value">{totalForks.toLocaleString()}</span>
-                <span className="stat-card-label">Total forks</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="dashboard-grid">
-            <div className="dash-section">
-              <ActivityFeed events={events} summary={contributionStats} />
-            </div>
-
-            <WeatherWidget />
-          </div>
-
-          <div className="dash-section dash-section--full">
-            <div className="dash-section-header">
-              <h2 className="widget-title">
-                <Star size={16} /> Recent Repositories
-              </h2>
-            </div>
-            <div className="top-repos-grid">
-              {recentRepos.map((repo) => (
-                <a
-                  key={repo.id}
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="top-repo-card"
-                >
-                  <div className="top-repo-name">{repo.name}</div>
-                  {repo.description && (
-                    <p className="top-repo-desc">{repo.description}</p>
-                  )}
-                  <div className="top-repo-meta">
-                    {repo.language && (
-                      <span className="top-repo-lang">
-                        <span className="lang-dot" /> {repo.language}
-                      </span>
+                    <div className="top-repo-name">{repo.name}</div>
+                    {repo.description && (
+                      <p className="top-repo-desc">{repo.description}</p>
                     )}
-                    <span className="top-repo-stat">
-                      <Star size={12} /> {repo.stargazers_count}
-                    </span>
-                    <span className="top-repo-stat">
-                      <GitFork size={12} /> {repo.forks_count}
-                    </span>
-                  </div>
-                </a>
-              ))}
-              {recentRepos.length === 0 && !reposLoading && (
-                <p className="top-repos-empty">No repositories found.</p>
-              )}
+                    <div className="top-repo-meta">
+                      {repo.language && (
+                        <span className="top-repo-lang">
+                          <span className="lang-dot" /> {repo.language}
+                        </span>
+                      )}
+                      <span className="top-repo-stat">
+                        <Star size={12} /> {repo.stargazers_count}
+                      </span>
+                      <span className="top-repo-stat">
+                        <GitFork size={12} /> {repo.forks_count}
+                      </span>
+                    </div>
+                  </a>
+                ))}
+                {recentRepos.length === 0 && !reposLoading && (
+                  <p className="top-repos-empty">No repositories found.</p>
+                )}
+              </div>
+            </div>
+
+            <div className="dash-section bento-activity">
+              <ActivityFeed events={events} summary={contributionStats} />
             </div>
           </div>
         </>

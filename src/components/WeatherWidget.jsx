@@ -26,9 +26,9 @@ function getWeatherIcon(description, size = 40) {
 function getInitialCity() {
   try {
     const saved = localStorage.getItem(WEATHER_CITY_KEY)
-    return saved || 'Lagos,Nigeria'
+    return saved || 'Lagos, Nigeria'
   } catch {
-    return 'Lagos,Nigeria'
+    return 'Lagos, Nigeria'
   }
 }
 
@@ -96,13 +96,6 @@ function WeatherWidget() {
           </div>
           <p className="weather-city">{areaName}</p>
           <p className="weather-desc">{description}</p>
-          <div className="weather-details">
-            {feelsLike !== undefined && (
-              <span>Feels like {feelsLike}°</span>
-            )}
-            {humidity && <span>Humidity {humidity}%</span>}
-            {windSpeed && <span>Wind {windSpeed} km/h</span>}
-          </div>
         </div>
       )}
     </div>

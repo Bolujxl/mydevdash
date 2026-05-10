@@ -52,9 +52,9 @@
 }
 
 [data-theme="light"] {
-  --bg-root: #f0f2f5;
+  --bg-root: #f9fafb;
   --bg-surface: #ffffff;
-  --bg-input: #f6f8fa;
+  --bg-input: #f3f4f6;
   --bg-hover: rgba(208, 215, 222, 0.35);
   --text-primary: #1f2328;
   --text-secondary: #656d76;

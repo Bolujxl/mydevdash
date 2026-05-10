@@ -93,10 +93,12 @@
   border-radius: var(--radius-xl);
   padding: 2rem 2.25rem;
   margin-bottom: 1.25rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-xs);
   position: relative;
   overflow: hidden;
   transition: box-shadow 0.3s ease;
+  height: 100%;
+  align-items: flex-start;
 }
 
 /* Decorative accent stripe */
@@ -106,8 +108,8 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--purple));
+  height: 2px;
+  background: var(--accent);
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
@@ -115,11 +117,11 @@
 .hero-card::after {
   content: '';
   position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, var(--accent-bg) 0%, transparent 70%);
+  top: -80px;
+  right: -80px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(88, 166, 255, 0.04) 0%, transparent 70%);
   pointer-events: none;
   border-radius: 50%;
 }
@@ -134,9 +136,9 @@
 }
 
 .hero-avatar {
-  width: 84px;
-  height: 84px;
-  border-radius: 50%;
+  width: 108px;
+  height: 108px;
+  border-radius: 18px;
   border: 3px solid var(--border-primary);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   display: block;
@@ -152,15 +154,107 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+/* ---- Status Dot ---- */
+.status-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  background: var(--success);
+  border-radius: 50%;
+  border: 4px solid var(--bg-surface);
+  z-index: 2;
+}
+
+.status-dot-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--success);
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* ---- CLI Header ---- */
+.cli-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-secondary);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: -0.25rem;
+}
+
+.cli-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.cli-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.cli-dot.red { background: #ff5f56; }
+.cli-dot.yellow { background: #ffbd2e; }
+.cli-dot.green { background: #27c93f; }
+
+/* ---- Hero Inline Stats ---- */
+.hero-inline-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.35rem;
+  padding: 0.65rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+}
+
+.inline-stat {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.stat-val {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stat-divider {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--border-primary);
 }
 
 .hero-top {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
+  gap: 1.15rem;
 }
 
 .hero-greeting {
@@ -182,6 +276,7 @@
 .hero-actions {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.65rem;
   flex-shrink: 0;
 }
@@ -367,11 +462,12 @@
 }
 
 .stat-card-value {
-  font-size: 1.6rem;
-  font-weight: 800;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: var(--text-primary);
   line-height: 1.1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 
 .stat-card-label {
@@ -383,12 +479,39 @@
   text-transform: uppercase;
 }
 
-/* ---- Dashboard Grid (2-col) ---- */
-.dashboard-grid {
+/* ---- Bento Box Grid Layout ---- */
+.bento-dashboard {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: repeat(12, 1fr);
   gap: 1.25rem;
-  align-items: start;
+  align-items: stretch;
+}
+
+.bento-hero { 
+  grid-column: span 8; 
+  margin-bottom: 0;
+}
+
+.bento-weather { 
+  grid-column: span 4; 
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-stats { 
+  grid-column: span 12; 
+  margin-bottom: 0;
+}
+
+.bento-repos { 
+  grid-column: span 8; 
+  margin-top: 0;
+  height: 100%;
+}
+
+.bento-activity { 
+  grid-column: span 4; 
+  position: relative;
 }
 
 /* ---- Dash Section Card ---- */
@@ -398,10 +521,6 @@
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   box-shadow: var(--shadow-xs);
-}
-
-.dash-section--full {
-  margin-top: 1.25rem;
 }
 
 .dash-section-header {
