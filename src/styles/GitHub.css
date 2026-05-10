@@ -228,7 +228,7 @@
 }
 
 .repo-card:hover {
-  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--accent-ring);
   transform: translateY(-1px);
 }
 
