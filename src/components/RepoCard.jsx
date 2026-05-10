@@ -1,3 +1,5 @@
+import { Star, GitFork } from 'lucide-react'
+
 function RepoCard({ repo }) {
   return (
     <div className="repo-card">
@@ -14,8 +16,12 @@ function RepoCard({ repo }) {
             {repo.language}
           </span>
         )}
-        <span className="repo-stat">⭐ {repo.stargazers_count}</span>
-        <span className="repo-stat">🍴 {repo.forks_count}</span>
+        <span className="repo-stat">
+          <Star size={12} /> {repo.stargazers_count}
+        </span>
+        <span className="repo-stat">
+          <GitFork size={12} /> {repo.forks_count}
+        </span>
       </div>
     </div>
   )

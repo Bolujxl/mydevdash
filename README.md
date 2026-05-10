@@ -1,16 +1,50 @@
-# React + Vite
+# DevDash
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal developer dashboard that tracks your GitHub activity, manages tasks, and shows live weather — all in one place.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Dashboard** — Greeting, GitHub profile overview, quick stats (tasks, stars, forks, languages), recent activity feed, recent repositories, and live weather widget
+- **GitHub Explorer** — Search any GitHub user, view their profile and repositories with sort and filter
+- **Task Manager** — Full CRUD task list with localStorage persistence, All/Active/Completed filters
+- **Weather Widget** — Search any city for live conditions (temperature, humidity, wind speed) with persistent city preference
+- **Activity Feed** — Real-time GitHub events feed showing commits, PRs, issues, stars, and more
+- **Error Boundary** — Graceful crash recovery
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** with Vite
+- **React Router v7** for client-side routing
+- **Lucide React** for icons
+- **Pure CSS** with GitHub-dark theme — no UI framework
+- **GitHub REST API** for profile, repos, and events
+- **wttr.in** for weather data
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+### Optional: GitHub Token
+
+By default, GitHub's anonymous rate limit is 60 req/hr. For 5000 req/hr, add a personal access token:
+
+1. Create a token at https://github.com/settings/tokens (classic, no scopes needed)
+2. Create a `.env` file in the project root:
+
+```
+VITE_GITHUB_TOKEN=ghp_your_token_here
+```
+
+3. Restart the dev server
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |

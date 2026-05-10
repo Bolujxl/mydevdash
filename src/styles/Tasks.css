@@ -11,27 +11,27 @@
 .task-input {
   flex: 1;
   padding: 0.75rem 1rem;
-  background: #161b22;
-  border: 1px solid #30363d;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-primary);
   border-radius: 10px;
-  color: #e6edf3;
+  color: var(--text-primary);
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s ease;
 }
 
 .task-input:focus {
-  border-color: #58a6ff;
+  border-color: var(--accent);
 }
 
 .task-input::placeholder {
-  color: #484f58;
+  color: var(--text-tertiary);
 }
 
 .task-add-btn {
   padding: 0.75rem 1.5rem;
-  background: #58a6ff;
-  color: #0d1117;
+  background: var(--accent);
+  color: #ffffff;
   border: none;
   border-radius: 10px;
   font-size: 0.9rem;
@@ -41,7 +41,7 @@
 }
 
 .task-add-btn:hover {
-  background: #79b8ff;
+  background: var(--accent-hover);
   transform: translateY(-1px);
 }
 
@@ -55,9 +55,9 @@
 .filter-btn {
   padding: 0.45rem 1rem;
   background: transparent;
-  border: 1px solid #30363d;
+  border: 1px solid var(--border-primary);
   border-radius: 8px;
-  color: #8b949e;
+  color: var(--text-secondary);
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
@@ -65,24 +65,24 @@
 }
 
 .filter-btn:hover {
-  color: #e6edf3;
-  border-color: #484f58;
+  color: var(--text-primary);
+  border-color: var(--text-tertiary);
 }
 
 .filter-btn.active {
-  background: rgba(88, 166, 255, 0.12);
-  border-color: #58a6ff;
-  color: #58a6ff;
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
   font-weight: 600;
 }
 
 /* ---- Task Count ---- */
 .task-count {
   font-size: 0.85rem;
-  color: #8b949e;
+  color: var(--text-secondary);
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #21262d;
+  border-bottom: 1px solid var(--border-secondary);
 }
 
 /* ---- Task List ---- */
@@ -93,10 +93,18 @@
 }
 
 .task-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
   text-align: center;
   padding: 3rem 1rem;
-  color: #8b949e;
+  color: var(--text-secondary);
   font-size: 0.95rem;
+}
+
+.task-empty .empty-icon {
+  color: var(--text-tertiary);
 }
 
 /* ---- Task Item ---- */
@@ -104,15 +112,15 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: #161b22;
-  border: 1px solid #30363d;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-primary);
   border-radius: 10px;
   padding: 0.85rem 1rem;
   transition: border-color 0.2s ease, transform 0.15s ease;
 }
 
 .task-item:hover {
-  border-color: #484f58;
+  border-color: var(--text-tertiary);
 }
 
 .task-item.done {
@@ -121,7 +129,7 @@
 
 .task-item.done .task-text {
   text-decoration: line-through;
-  color: #8b949e;
+  color: var(--text-secondary);
 }
 
 /* Custom checkbox */
@@ -143,7 +151,7 @@
 .task-checkmark {
   width: 20px;
   height: 20px;
-  border: 2px solid #30363d;
+  border: 2px solid var(--border-primary);
   border-radius: 6px;
   transition: all 0.2s ease;
   display: flex;
@@ -152,13 +160,13 @@
 }
 
 .task-checkbox:checked + .task-checkmark {
-  background: #58a6ff;
-  border-color: #58a6ff;
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .task-checkbox:checked + .task-checkmark::after {
   content: '✓';
-  color: #0d1117;
+  color: #ffffff;
   font-size: 0.7rem;
   font-weight: 700;
 }
@@ -166,13 +174,13 @@
 .task-text {
   flex: 1;
   font-size: 0.95rem;
-  color: #e6edf3;
+  color: var(--text-primary);
 }
 
 .task-delete {
   background: none;
   border: none;
-  color: #484f58;
+  color: var(--text-tertiary);
   font-size: 1.3rem;
   cursor: pointer;
   padding: 0 0.25rem;
@@ -182,7 +190,7 @@
 }
 
 .task-delete:hover {
-  color: #f85149;
+  color: var(--danger);
 }
 
 /* Mobile */

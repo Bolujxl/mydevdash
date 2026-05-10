@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { Search, Loader2, User, MapPin, Users, FolderGit2 } from 'lucide-react'
 import useFetch from '../hooks/useFetch'
 import RepoCard from '../components/RepoCard'
 import '../styles/GitHub.css'
@@ -7,8 +8,8 @@ function GitHub() {
   const [username, setUsername] = useState('')
   const [searchedUser, setSearchedUser] = useState('')
   const [filter, setFilter] = useState('')
+  const [sortBy, setSortBy] = useState('updated')
 
-  // Only fetch when a user has been searched
   const profileUrl = searchedUser
     ? `https://api.github.com/users/${searchedUser}`
     : null
@@ -24,16 +25,22 @@ function GitHub() {
     if (username.trim()) {
       setSearchedUser(username.trim())
       setFilter('')
+      setSortBy('updated')
     }
   }
 
-  // Memoized filtered repo list — recalculates only when repos or filter changes
   const filteredRepos = useMemo(() => {
     if (!repos || !Array.isArray(repos)) return []
-    return repos.filter((r) =>
+    let list = [...repos].filter((r) =>
       r.name.toLowerCase().includes(filter.toLowerCase())
     )
-  }, [repos, filter])
+    if (sortBy === 'stars') {
+      list.sort((a, b) => b.stargazers_count - a.stargazers_count)
+    } else if (sortBy === 'name') {
+      list.sort((a, b) => a.name.localeCompare(b.name))
+    }
+    return list
+  }, [repos, filter, sortBy])
 
   const loading = profileLoading || reposLoading
   const error = profileError || reposError
@@ -43,6 +50,7 @@ function GitHub() {
       <h1 className="page-title">GitHub Explorer</h1>
 
       <form className="github-search" onSubmit={handleSearch}>
+        <Search size={18} className="github-search-icon" />
         <input
           type="text"
           className="github-input"
@@ -53,17 +61,16 @@ function GitHub() {
         <button type="submit" className="github-btn">Search</button>
       </form>
 
-      {/* Empty state before any search */}
       {!searchedUser && (
         <div className="github-empty">
-          <span className="empty-icon">🔍</span>
+          <Search size={48} className="empty-icon" />
           <p>Search for a GitHub user to explore their profile and repositories.</p>
         </div>
       )}
 
       {loading && (
         <div className="github-loading">
-          <div className="spinner"></div>
+          <Loader2 size={20} className="spin-icon" />
           <span>Loading profile...</span>
         </div>
       )}
@@ -71,7 +78,6 @@ function GitHub() {
       {error && !loading && (
         <div className="github-error">
           <p>
-            ❌{' '}
             {error.includes('404')
               ? `User "${searchedUser}" not found. Check the username and try again.`
               : error}
@@ -89,17 +95,15 @@ function GitHub() {
             />
             <div className="profile-info">
               <h2 className="profile-name">{profile.name || searchedUser}</h2>
+              <p className="profile-login">@{profile.login}</p>
               {profile.bio && <p className="profile-bio">{profile.bio}</p>}
-              <div className="profile-stats">
-                <span className="profile-stat">
-                  <strong>{profile.followers}</strong> followers
-                </span>
-                <span className="profile-stat">
-                  <strong>{profile.following}</strong> following
-                </span>
-                <span className="profile-stat">
-                  <strong>{profile.public_repos}</strong> repos
-                </span>
+              <div className="profile-meta">
+                {profile.location && (
+                  <span><MapPin size={13} /> {profile.location}</span>
+                )}
+                <span><Users size={13} /> {profile.followers} followers</span>
+                <span><Users size={13} /> {profile.following} following</span>
+                <span><FolderGit2 size={13} /> {profile.public_repos} repos</span>
               </div>
             </div>
           </div>
@@ -110,13 +114,24 @@ function GitHub() {
                 <h2 className="section-title">
                   Repositories ({filteredRepos.length})
                 </h2>
-                <input
-                  type="text"
-                  className="repo-filter"
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                  placeholder="Filter repos by name..."
-                />
+                <div className="repos-controls">
+                  <input
+                    type="text"
+                    className="repo-filter"
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                    placeholder="Filter repos by name..."
+                  />
+                  <select
+                    className="repo-sort"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                  >
+                    <option value="updated">Recent</option>
+                    <option value="stars">Stars</option>
+                    <option value="name">Name</option>
+                  </select>
+                </div>
               </div>
 
               {filteredRepos.length === 0 ? (

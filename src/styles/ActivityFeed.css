@@ -1,0 +1,107 @@
+/* ========================
+   Activity Feed
+   ======================== */
+
+.activity-feed {
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.activity-summary {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.activity-empty {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.activity-item:hover {
+  background: var(--bg-hover);
+}
+
+.activity-icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--neutral-bg);
+  color: var(--text-secondary);
+}
+
+.type-PushEvent              .activity-icon-wrap { background: var(--success-bg);   color: var(--success); }
+.type-PullRequestEvent       .activity-icon-wrap { background: var(--accent-bg);    color: var(--accent); }
+.type-PullRequestReviewEvent .activity-icon-wrap { background: var(--purple-bg);    color: var(--purple); }
+.type-IssuesEvent            .activity-icon-wrap { background: var(--warning-bg);   color: var(--warning); }
+.type-WatchEvent             .activity-icon-wrap { background: var(--warning-bg);   color: var(--warning); }
+.type-CreateEvent            .activity-icon-wrap { background: var(--success-bg);   color: var(--success); }
+.type-ForkEvent              .activity-icon-wrap { background: var(--neutral-bg);   color: var(--text-secondary); }
+.type-DeleteEvent            .activity-icon-wrap { background: var(--danger-bg);    color: var(--danger); }
+
+.activity-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-message {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.activity-message strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.activity-message a {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.activity-message a:hover {
+  text-decoration: underline;
+}
+
+.activity-time {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  white-space: nowrap;
+}

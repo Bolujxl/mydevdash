@@ -5,51 +5,63 @@
 .app {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
 }
 
 .main-content {
   flex: 1;
+  margin-left: 240px;
   max-width: 1100px;
   width: 100%;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 2rem 2rem 2rem 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 1.5rem 1rem;
+  }
 }
 
 /* ---- Shared Spinner ---- */
 .spinner {
   width: 32px;
   height: 32px;
-  border: 3px solid #30363d;
-  border-top-color: #58a6ff;
+  border: 3px solid var(--border-primary);
+  border-top-color: var(--accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 /* ---- Shared Typography ---- */
 .page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: #e6edf3;
+  color: var(--text-primary);
+}
+
+.page-title-icon {
+  color: var(--accent);
+  flex-shrink: 0;
 }
 
 .section-title {
   font-size: 1.15rem;
   font-weight: 600;
-  color: #e6edf3;
+  color: var(--text-primary);
 }
 
 .widget-title {
   font-size: 1.15rem;
   font-weight: 600;
-  color: #e6edf3;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
@@ -68,7 +80,7 @@
   font-size: 7rem;
   font-weight: 800;
   line-height: 1;
-  background: linear-gradient(135deg, #58a6ff, #bc8cff);
+  background: linear-gradient(135deg, var(--accent), var(--purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -77,11 +89,11 @@
 .not-found h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #8b949e;
+  color: var(--text-secondary);
 }
 
 .not-found p {
-  color: #6e7681;
+  color: var(--text-muted);
   font-size: 1rem;
   max-width: 400px;
 }
@@ -89,8 +101,8 @@
 .home-btn {
   margin-top: 1.5rem;
   padding: 0.75rem 2rem;
-  background: #58a6ff;
-  color: #0d1117;
+  background: var(--accent);
+  color: #ffffff;
   border: none;
   border-radius: 10px;
   font-size: 0.95rem;
@@ -100,7 +112,53 @@
 }
 
 .home-btn:hover {
-  background: #79b8ff;
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(88, 166, 255, 0.25);
+}
+
+/* ---- Error Boundary ---- */
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg-root);
+  padding: 2rem;
+}
+
+.error-boundary-card {
+  text-align: center;
+  max-width: 420px;
+}
+
+.error-boundary-card h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.error-boundary-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.error-boundary-card button {
+  padding: 0.75rem 2rem;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.error-boundary-card button:hover {
+  background: var(--accent-hover);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(88, 166, 255, 0.25);
 }

@@ -32,7 +32,12 @@ export default function useFetch(url) {
       setError(null);
 
       try {
-        const response = await fetch(url, { signal: controller.signal });
+        const options = { signal: controller.signal }
+        const token = import.meta.env.VITE_GITHUB_TOKEN
+        if (token && url.includes('api.github.com')) {
+          options.headers = { Authorization: `Bearer ${token}` }
+        }
+        const response = await fetch(url, options);
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }

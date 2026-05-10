@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
+import { ClipboardList, CheckCircle2, ListTodo } from 'lucide-react'
 import TaskItem from '../components/TaskItem'
 import '../styles/Tasks.css'
 
 const STORAGE_KEY = 'devdash_tasks'
 
 function Tasks() {
-  // Initialize tasks from localStorage (lazy initializer for useState)
   const [tasks, setTasks] = useState(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY)
@@ -17,7 +17,6 @@ function Tasks() {
   const [newTask, setNewTask] = useState('')
   const [filterTab, setFilterTab] = useState('all')
 
-  // Persist tasks to localStorage on every change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
   }, [tasks])
@@ -57,7 +56,10 @@ function Tasks() {
 
   return (
     <div className="tasks-page">
-      <h1 className="page-title">Task Manager</h1>
+      <h1 className="page-title">
+        <ClipboardList size={22} className="page-title-icon" />
+        Task Manager
+      </h1>
 
       <form className="task-form" onSubmit={handleAddTask}>
         <input
@@ -89,11 +91,24 @@ function Tasks() {
       <div className="task-list">
         {filteredTasks.length === 0 ? (
           <div className="task-empty">
-            <p>
-              {filterTab === 'all' && '📝 No tasks yet. Add one above!'}
-              {filterTab === 'active' && '🎉 No active tasks. Great job!'}
-              {filterTab === 'completed' && '📋 No completed tasks yet.'}
-            </p>
+            {filterTab === 'all' && (
+              <>
+                <ListTodo size={40} className="empty-icon" />
+                <p>No tasks yet. Add one above!</p>
+              </>
+            )}
+            {filterTab === 'active' && (
+              <>
+                <CheckCircle2 size={40} className="empty-icon" />
+                <p>No active tasks. Great job!</p>
+              </>
+            )}
+            {filterTab === 'completed' && (
+              <>
+                <ClipboardList size={40} className="empty-icon" />
+                <p>No completed tasks yet.</p>
+              </>
+            )}
           </div>
         ) : (
           filteredTasks.map((task) => (
