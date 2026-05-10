@@ -12,8 +12,9 @@
   flex-direction: column;
   background: var(--bg-surface);
   border-right: 1px solid var(--border-primary);
-  z-index: 100;
+  z-index: 200;
   padding: 1.25rem 0.75rem;
+  transition: transform 0.25s ease;
 }
 
 .sidebar-brand {
@@ -103,49 +104,80 @@
   flex-shrink: 0;
 }
 
-/* Mobile — collapse to top bar */
+/* ---- Hamburger ---- */
+.sidebar-hamburger {
+  display: none;
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 150;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--border-primary);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Close button (mobile only) ---- */
+.sidebar-close {
+  display: none;
+}
+
+/* ---- Overlay ---- */
+.sidebar-overlay {
+  display: none;
+}
+
+/* ---- Mobile ---- */
 @media (max-width: 768px) {
-  .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-    bottom: auto;
-    flex-direction: row;
+  .sidebar-hamburger {
+    display: flex;
+  }
+
+  .sidebar-close {
+    display: flex;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 1rem;
-    border-right: none;
-    border-bottom: 1px solid var(--border-primary);
+    justify-content: center;
   }
 
-  .sidebar-brand {
-    padding: 0;
-    margin-bottom: 0;
+  .sidebar-close:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
   }
 
-  .sidebar-nav {
-    flex-direction: row;
-    flex: 0;
-    gap: 0;
+  .sidebar {
+    transform: translateX(-100%);
   }
 
-  .sidebar-link span,
-  .sidebar-theme-btn span {
-    display: none;
+  .sidebar.open {
+    transform: translateX(0);
   }
 
-  .sidebar-link {
-    padding: 0.5rem;
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 175;
+    animation: fadeIn 0.2s ease;
   }
 
-  .sidebar-footer {
-    padding-top: 0;
-    border-top: none;
-    margin-top: 0;
-  }
-
-  .sidebar-theme-btn {
-    width: auto;
-    padding: 0.5rem;
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 }
