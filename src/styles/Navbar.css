@@ -253,6 +253,7 @@
   .sidebar {
     transform: translateX(-100%);
     box-shadow: none;
+    z-index: 300;
   }
 
   .sidebar.open {
@@ -265,7 +266,7 @@
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.55);
-    z-index: 175;
+    z-index: 275;
     animation: overlayIn 0.2s ease;
     backdrop-filter: blur(2px);
   }

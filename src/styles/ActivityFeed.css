@@ -90,6 +90,14 @@
   }
 }
 
+@media (max-width: 768px) {
+  .activity-feed {
+    position: relative;
+    inset: auto; /* reset top/left/right/bottom */
+    height: 320px; /* Provide a fixed scrolling height on mobile */
+  }
+}
+
 /* ---- Icon ---- */
 .activity-icon-wrap {
   width: 27px;
