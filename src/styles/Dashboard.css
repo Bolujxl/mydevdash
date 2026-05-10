@@ -445,7 +445,7 @@
   }
 
   .hero-actions {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .hero-numbers {
