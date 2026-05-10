@@ -66,12 +66,16 @@ function ContributionChart({ events }) {
               />
             ))}
           </div>
-          {hovered && (
+          {hovered ? (
             <div className="heatmap-tooltip">
               <span className="heatmap-tooltip-label">{hovered.label}</span>
               <span className="heatmap-tooltip-value">
                 {hovered.count} event{hovered.count !== 1 ? 's' : ''}
               </span>
+            </div>
+          ) : (
+            <div className="heatmap-tooltip heatmap-tooltip--placeholder">
+              <span>Hover a day to see activity</span>
             </div>
           )}
           <div className="heatmap-legend">
