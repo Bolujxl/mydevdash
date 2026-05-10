@@ -26,9 +26,9 @@ function getWeatherIcon(description, size = 40) {
 function getInitialCity() {
   try {
     const saved = localStorage.getItem(WEATHER_CITY_KEY)
-    return saved || 'Lagos'
+    return saved || 'Lagos,Nigeria'
   } catch {
-    return 'Lagos'
+    return 'Lagos,Nigeria'
   }
 }
 

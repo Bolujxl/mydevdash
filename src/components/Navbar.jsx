@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Zap, Sun, Moon, LayoutDashboard, Search, ClipboardList, Menu, X } from 'lucide-react'
+import { Zap, Sun, Moon, LayoutDashboard, GitBranch, ClipboardList, Menu, X } from 'lucide-react'
 import { useTheme } from '../hooks/useTheme'
 import '../styles/Navbar.css'
 
@@ -17,47 +17,59 @@ function Navbar() {
         onClick={() => setOpen((prev) => !prev)}
         aria-label="Toggle menu"
       >
-        <Menu size={22} />
+        <Menu size={20} />
       </button>
 
       {open && <div className="sidebar-overlay" onClick={close} />}
 
       <aside className={`sidebar ${open ? 'open' : ''}`}>
         <button className="sidebar-close" onClick={close} aria-label="Close menu">
-          <X size={20} />
+          <X size={18} />
         </button>
 
         <div className="sidebar-brand">
-          <Zap size={24} className="sidebar-logo" />
-          <span className="sidebar-title">DevDash</span>
+          <div className="sidebar-logo-wrap">
+            <Zap size={18} />
+          </div>
+          <div>
+            <div className="sidebar-title">DevDash</div>
+            <div className="sidebar-version">v1.0 · beta</div>
+          </div>
         </div>
 
         <nav className="sidebar-nav">
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}
-            onClick={close}
-          >
-            <LayoutDashboard size={18} />
-            <span>Dashboard</span>
-          </NavLink>
-          <NavLink
-            to="/github"
-            className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}
-            onClick={close}
-          >
-            <Search size={18} />
-            <span>GitHub</span>
-          </NavLink>
-          <NavLink
-            to="/tasks"
-            className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}
-            onClick={close}
-          >
-            <ClipboardList size={18} />
-            <span>Tasks</span>
-          </NavLink>
+          <div className="nav-group">
+            <p className="nav-group-label">Workspace</p>
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}
+              onClick={close}
+            >
+              <LayoutDashboard size={17} />
+              <span>Dashboard</span>
+            </NavLink>
+          </div>
+
+          <div className="nav-group">
+            <p className="nav-group-label">Tools</p>
+            <NavLink
+              to="/github"
+              className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}
+              onClick={close}
+            >
+              <GitBranch size={17} />
+              <span>GitHub</span>
+            </NavLink>
+            <NavLink
+              to="/tasks"
+              className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}
+              onClick={close}
+            >
+              <ClipboardList size={17} />
+              <span>Tasks</span>
+            </NavLink>
+          </div>
         </nav>
 
         <div className="sidebar-footer">
@@ -66,7 +78,7 @@ function Navbar() {
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
             <span>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>
           </button>
         </div>

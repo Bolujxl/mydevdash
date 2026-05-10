@@ -12,77 +12,109 @@
   align-items: center;
   gap: 0.4rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.65rem;
 }
 
 .activity-summary {
-  font-size: 0.78rem;
+  font-size: 0.77rem;
   color: var(--text-muted);
-  margin-bottom: 0.85rem;
-  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--border-secondary);
+  line-height: 1.5;
 }
 
 .activity-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--text-secondary);
   font-size: 0.85rem;
-  padding: 1.5rem 0;
+  padding: 2.5rem 0;
   text-align: center;
 }
 
+/* ---- Timeline list ---- */
 .activity-list {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  max-height: 168px;
+  gap: 0;
+  max-height: 224px;
   overflow-y: auto;
+  padding-right: 0.25rem;
+  position: relative;
+}
+
+/* Vertical timeline line */
+.activity-list::before {
+  content: '';
+  position: absolute;
+  left: 13px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border-secondary);
+  pointer-events: none;
 }
 
 .activity-item {
   display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.55rem 0.65rem;
-  border-radius: 8px;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.25rem;
+  border-radius: var(--radius-sm);
   transition: background 0.15s ease;
+  position: relative;
 }
 
 .activity-item:hover {
   background: var(--bg-hover);
 }
 
+/* ---- Icon ---- */
 .activity-icon-wrap {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   background: var(--neutral-bg);
   color: var(--text-secondary);
+  border: 1.5px solid var(--border-secondary);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.15s ease;
 }
 
-.type-PushEvent              .activity-icon-wrap { background: var(--success-bg);   color: var(--success); }
-.type-PullRequestEvent       .activity-icon-wrap { background: var(--accent-bg);    color: var(--accent); }
-.type-PullRequestReviewEvent .activity-icon-wrap { background: var(--purple-bg);    color: var(--purple); }
-.type-IssuesEvent            .activity-icon-wrap { background: var(--warning-bg);   color: var(--warning); }
-.type-WatchEvent             .activity-icon-wrap { background: var(--warning-bg);   color: var(--warning); }
-.type-CreateEvent            .activity-icon-wrap { background: var(--success-bg);   color: var(--success); }
-.type-ForkEvent              .activity-icon-wrap { background: var(--neutral-bg);   color: var(--text-secondary); }
-.type-DeleteEvent            .activity-icon-wrap { background: var(--danger-bg);    color: var(--danger); }
+.activity-item:hover .activity-icon-wrap {
+  transform: scale(1.1);
+}
+
+.type-PushEvent              .activity-icon-wrap { background: var(--success-bg);  color: var(--success);  border-color: rgba(63, 185, 80, 0.2);  }
+.type-PullRequestEvent       .activity-icon-wrap { background: var(--accent-bg);   color: var(--accent);   border-color: var(--accent-border); }
+.type-PullRequestReviewEvent .activity-icon-wrap { background: var(--purple-bg);   color: var(--purple);   border-color: rgba(188, 140, 255, 0.2); }
+.type-IssuesEvent            .activity-icon-wrap { background: var(--warning-bg);  color: var(--warning);  border-color: rgba(210, 153, 34, 0.2);  }
+.type-WatchEvent             .activity-icon-wrap { background: var(--warning-bg);  color: var(--warning);  border-color: rgba(210, 153, 34, 0.2);  }
+.type-CreateEvent            .activity-icon-wrap { background: var(--success-bg);  color: var(--success);  border-color: rgba(63, 185, 80, 0.2);  }
+.type-ForkEvent              .activity-icon-wrap { background: var(--neutral-bg);  color: var(--text-secondary); }
+.type-DeleteEvent            .activity-icon-wrap { background: var(--danger-bg);   color: var(--danger);   border-color: var(--danger-border); }
 
 .activity-body {
   flex: 1;
   min-width: 0;
+  padding-top: 0.2rem;
 }
 
 .activity-message {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .activity-message strong {
@@ -100,8 +132,9 @@
 }
 
 .activity-time {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--text-tertiary);
   flex-shrink: 0;
   white-space: nowrap;
+  padding-top: 0.25rem;
 }
