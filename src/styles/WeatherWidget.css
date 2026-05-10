@@ -133,6 +133,17 @@
   margin-bottom: 0.75rem;
 }
 
+.weather-details {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-secondary);
+}
+
 
 @media (max-width: 480px) {
   .weather-form {
