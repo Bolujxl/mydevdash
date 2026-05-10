@@ -229,7 +229,7 @@
 
 .repo-card:hover {
   border-color: var(--accent);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .repo-name a {
