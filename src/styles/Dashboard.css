@@ -245,13 +245,13 @@
 
 .stat-card:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--accent-ring);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px var(--accent-ring);
 }
 
-.stat-card--green:hover  { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 1px rgba(63, 185, 80, 0.18); }
-.stat-card--blue:hover   { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--accent-ring); }
-.stat-card--purple:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 1px rgba(188, 140, 255, 0.18); }
-.stat-card--amber:hover  { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 1px rgba(210, 153, 34, 0.18); }
+.stat-card--green:hover  { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px rgba(63, 185, 80, 0.18); }
+.stat-card--blue:hover   { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px var(--accent-ring); }
+.stat-card--purple:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px rgba(188, 140, 255, 0.18); }
+.stat-card--amber:hover  { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px rgba(210, 153, 34, 0.18); }
 
 .stat-card-icon-wrap {
   width: 40px;
@@ -344,7 +344,7 @@
 }
 
 .top-repo-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--accent-ring);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px var(--accent-ring);
   transform: translateY(-1px);
   text-decoration: none;
 }
