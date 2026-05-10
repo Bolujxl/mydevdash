@@ -6,6 +6,7 @@ import {
 import useFetch from '../hooks/useFetch'
 import WeatherWidget from '../components/WeatherWidget'
 import ActivityFeed from '../components/ActivityFeed'
+import ContributionChart from '../components/ContributionChart'
 import '../styles/Dashboard.css'
 
 const GH_USER_KEY = 'devdash_github_user'
@@ -287,6 +288,8 @@ function Dashboard() {
             <div className="dash-section bento-activity">
               <ActivityFeed events={events} summary={contributionStats} />
             </div>
+
+            <ContributionChart events={events} />
           </div>
         </>
       ) : null}

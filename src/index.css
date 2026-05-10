@@ -18,6 +18,7 @@
   --accent-bg-hover: rgba(88, 166, 255, 0.18);
   --accent-border: rgba(88, 166, 255, 0.25);
   --accent-ring: rgba(88, 166, 255, 0.18);
+  --chart-accent: #58a6ff;
   --danger: #f85149;
   --danger-bg: rgba(248, 81, 73, 0.08);
   --danger-border: rgba(248, 81, 73, 0.15);
@@ -68,6 +69,7 @@
   --accent-bg-hover: rgba(9, 105, 218, 0.15);
   --accent-border: rgba(9, 105, 218, 0.2);
   --accent-ring: rgba(9, 105, 218, 0.12);
+  --chart-accent: #0969da;
   --danger: #cf222e;
   --danger-bg: rgba(207, 34, 46, 0.06);
   --danger-border: rgba(207, 34, 46, 0.12);

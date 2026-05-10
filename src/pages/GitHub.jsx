@@ -1,4 +1,4 @@
-beinimport { useState, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { Search, Loader2, MapPin, Users, FolderGit2, Globe } from 'lucide-react'
 import useFetch from '../hooks/useFetch'
 import RepoCard from '../components/RepoCard'
