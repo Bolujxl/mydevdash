@@ -228,6 +228,10 @@
   user-select: none;
 }
 
+.repo-table th.num {
+  text-align: right;
+}
+
 @media (hover: hover) {
   .repo-table th.sortable:hover {
     color: var(--text-primary);

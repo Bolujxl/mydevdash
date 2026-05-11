@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Activity, Calendar, Code, GitFork, Star } from 'lucide-react'
+import { Activity, Calendar, Code, Star } from 'lucide-react'
 import useFetch from '../hooks/useFetch'
 import CommitHeatmap from '../components/CommitHeatmap'
 import { getLangColor } from '../utils/langColors'
@@ -134,8 +134,7 @@ function ActivityPage() {
               <tr>
                 <th className="sortable" onClick={() => toggleSort('name')}>Repository{sortArrow('name')}</th>
                 <th>Language</th>
-                <th className="sortable" onClick={() => toggleSort('stars')}>Stars{sortArrow('stars')}</th>
-                <th>Forks</th>
+                <th className="sortable num" onClick={() => toggleSort('stars')}>Stars{sortArrow('stars')}</th>
                 <th className="sortable" onClick={() => toggleSort('pushed')}>Last pushed{sortArrow('pushed')}</th>
                 <th>Status</th>
               </tr>
@@ -159,7 +158,6 @@ function ActivityPage() {
                       ) : '—'}
                     </td>
                     <td className="num"><Star size={12} /> {repo.stargazers_count}</td>
-                    <td className="num"><GitFork size={12} /> {repo.forks_count}</td>
                     <td>{getRelativeTime(repo.pushed_at)}</td>
                     <td><span className={`repo-badge ${badge.class}`}>{badge.label}</span></td>
                   </tr>
