@@ -577,10 +577,18 @@
 }
 
 .stat-card-label {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: var(--text-secondary);
-  font-weight: 400;
+  font-weight: 500;
   white-space: nowrap;
+  margin-top: 0.15rem;
+}
+
+.stat-copy {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 0.35rem;
 }
 
 .stat-card-label {

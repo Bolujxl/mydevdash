@@ -238,6 +238,7 @@ function Dashboard() {
                 <div className="stat-card-body">
                   <span className="stat-card-value">{completedCount}</span>
                   <span className="stat-card-label">Tasks done</span>
+                  <p className="stat-copy">{completedCount > 0 ? 'Keep the momentum.' : 'Ready to begin?'}</p>
                 </div>
               </div>
               <div className="stat-card stat-card--blue">
@@ -247,6 +248,7 @@ function Dashboard() {
                 <div className="stat-card-body">
                   <span className="stat-card-value">{totalStars.toLocaleString()}</span>
                   <span className="stat-card-label">Total stars</span>
+                  <p className="stat-copy">{totalStars > 0 ? 'Your work is valued.' : 'Ship something great.'}</p>
                 </div>
               </div>
               <div className="stat-card stat-card--purple">
@@ -258,6 +260,7 @@ function Dashboard() {
                     {reposLoading ? '...' : uniqueLanguages}
                   </span>
                   <span className="stat-card-label">Languages used</span>
+                  <p className="stat-copy">{uniqueLanguages > 1 ? 'A versatile stack.' : 'Specialize and grow.'}</p>
                 </div>
               </div>
             </div>
