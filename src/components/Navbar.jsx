@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Zap, Sun, Moon, LayoutDashboard, GitBranch, ClipboardList, Menu, X } from 'lucide-react'
+import { Zap, Sun, Moon, LayoutDashboard, GitBranch, ClipboardList, Activity, Menu, X } from 'lucide-react'
 import { useTheme } from '../hooks/useTheme'
 import '../styles/Navbar.css'
 
@@ -61,14 +61,22 @@ function Navbar() {
               <GitBranch size={17} />
               <span>GitHub</span>
             </NavLink>
-            <NavLink
-              to="/tasks"
-              className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}
-              onClick={close}
-            >
-              <ClipboardList size={17} />
-              <span>Tasks</span>
-            </NavLink>
+          <NavLink
+            to="/tasks"
+            className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}
+            onClick={close}
+          >
+            <ClipboardList size={18} />
+            <span>Tasks</span>
+          </NavLink>
+          <NavLink
+            to="/activity"
+            className={({ isActive }) => isActive ? 'sidebar-link active' : 'sidebar-link'}
+            onClick={close}
+          >
+            <Activity size={18} />
+            <span>Activity</span>
+          </NavLink>
           </div>
         </nav>
 

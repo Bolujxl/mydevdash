@@ -1,0 +1,176 @@
+import { useMemo, useState } from 'react'
+import { Activity, Calendar, Code, GitFork, Star } from 'lucide-react'
+import useFetch from '../hooks/useFetch'
+import CommitHeatmap from '../components/CommitHeatmap'
+import { getLangColor } from '../utils/langColors'
+import '../styles/Activity.css'
+
+const GH_USER = (() => {
+  try { return localStorage.getItem('devdash_github_user') || 'bolujxl' }
+  catch { return 'bolujxl' }
+})()
+
+function getActivityBadge(repo) {
+  if (!repo.pushed_at) return { label: 'Dormant', class: 'dormant' }
+  const days = (Date.now() - new Date(repo.pushed_at).getTime()) / 86400000
+  if (days <= 14) return { label: 'Active', class: 'active' }
+  if (days <= 60) return { label: 'Moderate', class: 'moderate' }
+  return { label: 'Dormant', class: 'dormant' }
+}
+
+function getRelativeTime(dateStr) {
+  if (!dateStr) return '—'
+  const days = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000)
+  if (days === 0) return 'today'
+  if (days === 1) return 'yesterday'
+  if (days < 30) return `${days} days ago`
+  if (days < 365) return `${Math.floor(days / 30)}mo ago`
+  return `${Math.floor(days / 365)}y ago`
+}
+
+function ActivityPage() {
+  const eventsUrl = `https://api.github.com/users/${GH_USER}/events?per_page=100`
+  const reposUrl = `https://api.github.com/users/${GH_USER}/repos?per_page=100`
+
+  const { data: events, loading: evLoading } = useFetch(eventsUrl)
+  const { data: repos } = useFetch(reposUrl)
+
+  const [sortKey, setSortKey] = useState('pushed')
+  const [sortDir, setSortDir] = useState('desc')
+
+  const sortedRepos = useMemo(() => {
+    if (!Array.isArray(repos)) return []
+    const list = [...repos]
+    if (sortKey === 'stars') list.sort((a, b) => b.stargazers_count - a.stargazers_count)
+    else if (sortKey === 'name') list.sort((a, b) => a.name.localeCompare(b.name))
+    else list.sort((a, b) => new Date(b.pushed_at || 0).getTime() - new Date(a.pushed_at || 0).getTime())
+    if (sortDir === 'asc') list.reverse()
+    return list
+  }, [repos, sortKey, sortDir])
+
+  const codeStats = useMemo(() => {
+    if (!Array.isArray(events)) return { topDay: '—', avgCommits: 0, topLang: '—' }
+
+    const dayCount = [0, 0, 0, 0, 0, 0, 0]
+    let pushTotal = 0
+    const cutoff = new Date()
+    cutoff.setDate(cutoff.getDate() - 30)
+    for (const e of events) {
+      if (e.type === 'PushEvent') {
+        pushTotal++
+        const d = new Date(e.created_at)
+        if (d > cutoff) dayCount[d.getDay()]++
+      }
+    }
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    const maxIdx = dayCount.indexOf(Math.max(...dayCount))
+    const topDay = days[maxIdx]
+
+    const avgCommits = Math.round(pushTotal / 4)
+
+    let topLang = '—'
+    if (Array.isArray(repos)) {
+      const langCount = {}
+      for (const r of repos) {
+        if (r.language) langCount[r.language] = (langCount[r.language] || 0) + 1
+      }
+      let max = 0
+      for (const [lang, c] of Object.entries(langCount)) {
+        if (c > max) { max = c; topLang = lang }
+      }
+    }
+
+    return { topDay, avgCommits, topLang }
+  }, [events, repos])
+
+  const toggleSort = (key) => {
+    if (sortKey === key) setSortDir((d) => (d === 'desc' ? 'asc' : 'desc'))
+    else { setSortKey(key); setSortDir('desc') }
+  }
+
+  const sortArrow = (key) => sortKey === key ? (sortDir === 'desc' ? ' ↓' : ' ↑') : ''
+
+  return (
+    <div className="activity-page">
+      <h1 className="page-title">
+        <Activity size={22} className="page-title-icon" /> Activity
+      </h1>
+
+      {evLoading ? (
+        <div className="activity-loading"><div className="spinner" /><span>Loading activity...</span></div>
+      ) : (
+        <CommitHeatmap events={events} />
+      )}
+
+      <div className="code-stats-row">
+        <div className="code-stat-card">
+          <Calendar size={16} />
+          <div>
+            <span className="code-stat-label">Most active day</span>
+            <span className="code-stat-value">{codeStats.topDay}</span>
+          </div>
+        </div>
+        <div className="code-stat-card">
+          <GitFork size={16} />
+          <div>
+            <span className="code-stat-label">Avg pushes / week</span>
+            <span className="code-stat-value">{codeStats.avgCommits}</span>
+          </div>
+        </div>
+        <div className="code-stat-card">
+          <Code size={16} />
+          <div>
+            <span className="code-stat-label">Top language</span>
+            <span className="code-stat-value">{codeStats.topLang}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="repo-table-section">
+        <h2 className="section-title">Repo Deep Dive</h2>
+        <div className="repo-table-wrap">
+          <table className="repo-table">
+            <thead>
+              <tr>
+                <th className="sortable" onClick={() => toggleSort('name')}>Repository{sortArrow('name')}</th>
+                <th>Language</th>
+                <th className="sortable" onClick={() => toggleSort('stars')}>Stars{sortArrow('stars')}</th>
+                <th>Forks</th>
+                <th className="sortable" onClick={() => toggleSort('pushed')}>Last pushed{sortArrow('pushed')}</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedRepos.map((repo) => {
+                const badge = getActivityBadge(repo)
+                return (
+                  <tr key={repo.id}>
+                    <td>
+                      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="repo-table-name">
+                        {repo.name}
+                      </a>
+                    </td>
+                    <td>
+                      {repo.language ? (
+                        <span className="repo-table-lang">
+                          <span className="lang-dot" style={{ background: getLangColor(repo.language) }} />
+                          {repo.language}
+                        </span>
+                      ) : '—'}
+                    </td>
+                    <td className="num"><Star size={12} /> {repo.stargazers_count}</td>
+                    <td className="num"><GitFork size={12} /> {repo.forks_count}</td>
+                    <td>{getRelativeTime(repo.pushed_at)}</td>
+                    <td><span className={`repo-badge ${badge.class}`}>{badge.label}</span></td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default ActivityPage

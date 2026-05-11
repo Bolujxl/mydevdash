@@ -1,0 +1,318 @@
+/* ========================
+   Activity Page
+   ======================== */
+
+/* ---- Commit Heatmap ---- */
+.heatmap-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+.heatmap-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.heatmap-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.heatmap-range {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.heatmap-range-btn {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-primary);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+@media (hover: hover) {
+  .heatmap-range-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--text-tertiary);
+  }
+}
+
+.heatmap-range-btn.active {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.heatmap-summary {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.heatmap-grid-wrap {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.heatmap-grid {
+  display: flex;
+  gap: 0;
+}
+
+.heatmap-y-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-right: 0.5rem;
+  padding-top: 0;
+}
+
+.heatmap-day-label {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  height: 14px;
+  line-height: 14px;
+  text-align: right;
+  width: 28px;
+}
+
+.heatmap-cells-wrap {
+  display: flex;
+  gap: 3px;
+  overflow-x: auto;
+}
+
+.heatmap-week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.heatmap-cell {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--border-secondary);
+  transition: transform 0.12s ease;
+}
+
+.heatmap-cell.heatmap-int-1 { background: rgba(0, 161, 224, 0.3); }
+.heatmap-cell.heatmap-int-2 { background: rgba(0, 161, 224, 0.6); }
+.heatmap-cell.heatmap-int-3 { background: var(--accent); }
+
+.heatmap-cell.dimmed {
+  opacity: 0.25;
+}
+
+.heatmap-cell.heatmap-empty {
+  background: transparent;
+}
+
+@media (hover: hover) {
+  .heatmap-cell:not(.heatmap-empty):hover {
+    transform: scale(1.5);
+  }
+}
+
+[data-theme="dark"] .heatmap-cell.heatmap-int-1 { background: rgba(0, 161, 224, 0.3); }
+[data-theme="dark"] .heatmap-cell.heatmap-int-2 { background: rgba(0, 161, 224, 0.55); }
+[data-theme="dark"] .heatmap-cell.heatmap-int-3 { background: var(--accent); }
+
+.heatmap-tooltip {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  padding: 0.35rem 0;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.heatmap-legend .heatmap-cell {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* ---- Code Stats Row ---- */
+.code-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gap);
+  margin-bottom: var(--space-8);
+}
+
+.code-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  color: var(--text-secondary);
+}
+
+.code-stat-card svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.code-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.code-stat-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: 'Source Code Pro', monospace;
+}
+
+/* ---- Repo Table ---- */
+.repo-table-section {
+  margin-bottom: var(--space-8);
+}
+
+.repo-table-section .section-title {
+  margin-bottom: 1rem;
+}
+
+.repo-table-wrap {
+  overflow-x: auto;
+}
+
+.repo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.repo-table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-secondary);
+  white-space: nowrap;
+}
+
+.repo-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (hover: hover) {
+  .repo-table th.sortable:hover {
+    color: var(--text-primary);
+  }
+}
+
+.repo-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border-secondary);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.repo-table tr:hover td {
+  background: var(--bg-hover);
+}
+
+.repo-table-name {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.repo-table-name:hover {
+  text-decoration: underline;
+}
+
+.repo-table .num {
+  text-align: right;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.8rem;
+}
+
+.repo-table-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.repo-table .lang-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.repo-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.repo-badge.active {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.repo-badge.moderate {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.repo-badge.dormant {
+  background: var(--neutral-bg);
+  color: var(--text-muted);
+}
+
+/* ---- Loading ---- */
+.activity-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 0;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .code-stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .heatmap-cells-wrap {
+    max-width: 100%;
+  }
+}
