@@ -8,6 +8,7 @@ import WeatherWidget from '../components/WeatherWidget'
 import ActivityFeed from '../components/ActivityFeed'
 import ContributionChart from '../components/ContributionChart'
 import StreakCard from '../components/StreakCard'
+import { getLangColor } from '../utils/langColors'
 import '../styles/Dashboard.css'
 
 const GH_USER_KEY = 'devdash_github_user'
@@ -293,7 +294,7 @@ function Dashboard() {
                     <div className="top-repo-meta">
                       {repo.language && (
                         <span className="top-repo-lang">
-                          <span className="lang-dot" /> {repo.language}
+                          <span className="lang-dot" style={{ background: getLangColor(repo.language) }} /> {repo.language}
                         </span>
                       )}
                       <span className="top-repo-stat">
