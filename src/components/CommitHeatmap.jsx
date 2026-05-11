@@ -3,6 +3,8 @@ import { useMemo, useState } from 'react'
 function buildGrid(events, range) {
   const now = new Date()
   const rangeDays = { '30d': 30, '3mo': 90, '6mo': 180, '1y': 365 }[range] || 365
+  const activeCutoff = new Date(now)
+  activeCutoff.setDate(activeCutoff.getDate() - rangeDays)
 
   const pushMap = {}
   if (Array.isArray(events)) {
@@ -15,11 +17,9 @@ function buildGrid(events, range) {
   }
 
   const weeks = []
-  const totalDays = rangeDays
+  // Always show full 52 weeks (~365 days), aligned to Sunday
   const startDate = new Date(now)
-  startDate.setDate(startDate.getDate() - totalDays + 1)
-
-  // Adjust start to the previous Sunday so weeks align
+  startDate.setDate(startDate.getDate() - 364)
   const dayOfWeek = startDate.getDay()
   startDate.setDate(startDate.getDate() - dayOfWeek)
 
@@ -27,11 +27,12 @@ function buildGrid(events, range) {
   let week = []
   while (current <= now) {
     const dateStr = current.toISOString().slice(0, 10)
+    const cellDate = new Date(current)
     week.push({
       date: dateStr,
       count: pushMap[dateStr] || 0,
-      label: current.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }),
-      inRange: current >= new Date(now.getTime() - rangeDays * 86400000),
+      label: cellDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }),
+      inRange: cellDate >= activeCutoff,
     })
     if (current.getDay() === 6 && week.length > 0) {
       weeks.push(week)
@@ -41,7 +42,7 @@ function buildGrid(events, range) {
   }
   if (week.length > 0) weeks.push(week)
 
-  return { weeks, pushMap }
+  return { weeks }
 }
 
 function getIntensityClass(count) {
@@ -59,20 +60,7 @@ function CommitHeatmap({ events }) {
 
   const { weeks } = useMemo(() => buildGrid(events, range), [events, range])
 
-  const totalPushes = Object.values(
-    useMemo(() => {
-      const m = {}
-      if (Array.isArray(events)) {
-        for (const e of events) {
-          if (e.type === 'PushEvent') {
-            const d = e.created_at?.slice(0, 10)
-            if (d) m[d] = (m[d] || 0) + 1
-          }
-        }
-      }
-      return m
-    }, [events])
-  ).reduce((s, c) => s + c, 0)
+  const totalPushes = weeks.reduce((s, w) => s + w.reduce((ws, c) => ws + (c.inRange ? c.count : 0), 0), 0)
 
   return (
     <div className="heatmap-card">

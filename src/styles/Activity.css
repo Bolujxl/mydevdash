@@ -115,7 +115,7 @@
 .heatmap-cell.heatmap-int-3 { background: var(--accent); }
 
 .heatmap-cell.dimmed {
-  opacity: 0.25;
+  opacity: 0.2;
 }
 
 .heatmap-cell.heatmap-empty {
