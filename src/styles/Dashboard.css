@@ -70,6 +70,49 @@
   }
 }
 
+/* ---- Error State ---- */
+.dash-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+.dash-error-card {
+  text-align: center;
+  max-width: 420px;
+}
+
+.dash-error-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.dash-error-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.dash-error-btn {
+  padding: 0.65rem 1.5rem;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+@media (hover: hover) {
+  .dash-error-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+}
+
 /* ---- Loading ---- */
 .dash-loading {
   display: flex;

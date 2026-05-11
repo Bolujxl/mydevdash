@@ -48,7 +48,7 @@ function Dashboard() {
     ? `https://api.github.com/users/${savedUsername}/events?per_page=30`
     : null
 
-  const { data: profile, loading: profileLoading } = useFetch(profileUrl)
+  const { data: profile, loading: profileLoading, error: profileError } = useFetch(profileUrl)
   const { data: repos, loading: reposLoading } = useFetch(reposUrl)
   const { data: events } = useFetch(eventsUrl)
 
@@ -135,6 +135,31 @@ function Dashboard() {
         <div className="dash-loading">
           <div className="spinner" />
           <span>Loading your dashboard...</span>
+        </div>
+      ) : null}
+
+      {!loading && savedUsername && !profile ? (
+        <div className="dash-error">
+          <div className="dash-error-card">
+            {profileError && profileError.includes('404') ? (
+              <>
+                <p className="dash-error-text">
+                  User <strong>@{savedUsername}</strong> not found.
+                </p>
+                <button className="dash-error-btn" onClick={handleChangeUsername}>
+                  Try a different username
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="dash-error-text">
+                  {profileError
+                    ? `Could not load dashboard. ${profileError}`
+                    : 'No data available for this user.'}
+                </p>
+              </>
+            )}
+          </div>
         </div>
       ) : null}
 
