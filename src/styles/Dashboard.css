@@ -242,7 +242,7 @@
   padding: 0.45rem 0.85rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-secondary);
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: 'Source Code Pro', monospace;
   font-size: 0.75rem;
   color: var(--text-muted);
   margin-bottom: -0.25rem;
@@ -284,7 +284,7 @@
 }
 
 .stat-val {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: 'Source Code Pro', monospace;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-primary);
@@ -523,7 +523,7 @@
 }
 
 .stat-card-value {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: 'Source Code Pro', monospace;
   font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);

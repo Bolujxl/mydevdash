@@ -114,7 +114,7 @@
 }
 
 .weather-temp {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: 'Source Code Pro', monospace;
   font-size: 2.75rem;
   font-weight: 700;
   color: var(--text-primary);
