@@ -66,9 +66,9 @@
 }
 
 [data-theme="dark"] {
-  --bg-root: #000e1a;
-  --bg-surface: #001225;
-  --bg-input: #000810;
+  --bg-root: #000912;
+  --bg-surface: #000d1a;
+  --bg-input: #00050a;
   --bg-hover: rgba(255, 255, 255, 0.06);
   --text-primary: #f4f6f9;
   --text-secondary: #a0aec0;
@@ -92,10 +92,10 @@
   --purple: #9f7aea;
   --purple-bg: rgba(159, 122, 234, 0.12);
   --neutral-bg: rgba(255, 255, 255, 0.04);
-  --scrollbar-track: #001225;
+  --scrollbar-track: #000d1a;
   --scrollbar-thumb: rgba(255, 255, 255, 0.08);
   --scrollbar-thumb-hover: rgba(255, 255, 255, 0.14);
-  --hero-gradient: linear-gradient(135deg, #001225 0%, #000810 100%);
+  --hero-gradient: linear-gradient(135deg, #000d1a 0%, #00050a 100%);
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
