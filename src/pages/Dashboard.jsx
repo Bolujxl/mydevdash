@@ -7,6 +7,7 @@ import useFetch from '../hooks/useFetch'
 import WeatherWidget from '../components/WeatherWidget'
 import ActivityFeed from '../components/ActivityFeed'
 import ContributionChart from '../components/ContributionChart'
+import StreakCard from '../components/StreakCard'
 import '../styles/Dashboard.css'
 
 const GH_USER_KEY = 'devdash_github_user'
@@ -47,10 +48,6 @@ function Dashboard() {
 
   const totalStars = Array.isArray(repos)
     ? repos.reduce((sum, r) => sum + (r.stargazers_count || 0), 0)
-    : 0
-
-  const totalForks = Array.isArray(repos)
-    ? repos.reduce((sum, r) => sum + (r.forks_count || 0), 0)
     : 0
 
   const uniqueLanguages = useMemo(() => {
@@ -233,6 +230,7 @@ function Dashboard() {
             </div>
 
             <div className="stat-cards-row bento-stats">
+              <StreakCard completedCount={completedCount} events={events} />
               <div className="stat-card stat-card--green">
                 <div className="stat-card-icon-wrap">
                   <CheckCircle2 size={20} />
@@ -260,15 +258,6 @@ function Dashboard() {
                     {reposLoading ? '...' : uniqueLanguages}
                   </span>
                   <span className="stat-card-label">Languages used</span>
-                </div>
-              </div>
-              <div className="stat-card stat-card--amber">
-                <div className="stat-card-icon-wrap">
-                  <GitFork size={20} />
-                </div>
-                <div className="stat-card-body">
-                  <span className="stat-card-value">{totalForks.toLocaleString()}</span>
-                  <span className="stat-card-label">Total forks</span>
                 </div>
               </div>
             </div>

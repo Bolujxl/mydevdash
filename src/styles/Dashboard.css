@@ -515,6 +515,40 @@
 .stat-card--purple .stat-card-icon-wrap { background: var(--purple-bg);   color: var(--purple); }
 .stat-card--amber  .stat-card-icon-wrap { background: var(--warning-bg);  color: var(--warning); }
 
+/* Streak card */
+.stat-card--streak {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  grid-column: span 1;
+}
+
+.stat-card--streak .stat-card-icon-wrap {
+  background: rgba(255, 154, 60, 0.1);
+  color: var(--warning);
+}
+
+.flame-icon {
+  transition: filter 0.3s ease;
+}
+
+.flame-glow {
+  filter: drop-shadow(0 0 6px rgba(255, 154, 60, 0.5));
+  animation: flamePulse 2s ease-in-out infinite;
+}
+
+@keyframes flamePulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(255, 154, 60, 0.5)); }
+  50% { filter: drop-shadow(0 0 12px rgba(255, 154, 60, 0.7)); }
+}
+
+.streak-copy {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  max-width: 180px;
+}
+
 .stat-card-body {
   display: flex;
   flex-direction: column;
