@@ -517,15 +517,33 @@
 
 /* Streak card */
 .stat-card--streak {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
   grid-column: span 1;
 }
 
 .stat-card--streak .stat-card-icon-wrap {
   background: rgba(255, 154, 60, 0.1);
   color: var(--warning);
+}
+
+.streak-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.streak-main .stat-card-value {
+  font-size: 1.5rem;
+}
+
+.streak-main .stat-card-label {
+  margin-top: 0;
+}
+
+.streak-copy {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 0.25rem;
 }
 
 .flame-icon {
@@ -540,13 +558,6 @@
 @keyframes flamePulse {
   0%, 100% { filter: drop-shadow(0 0 6px rgba(255, 154, 60, 0.5)); }
   50% { filter: drop-shadow(0 0 12px rgba(255, 154, 60, 0.7)); }
-}
-
-.streak-copy {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  line-height: 1.4;
-  max-width: 180px;
 }
 
 .stat-card-body {
