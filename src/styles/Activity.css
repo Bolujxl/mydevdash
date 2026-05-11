@@ -145,6 +145,7 @@
 .heatmap-tooltip-placeholder {
   color: var(--text-muted);
   font-size: 0.72rem;
+  font-weight: 500;
 }
 
 .heatmap-legend {
