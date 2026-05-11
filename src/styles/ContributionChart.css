@@ -80,15 +80,15 @@
 }
 
 .heatmap-cell.heatmap-int-0 { background: var(--border-secondary); }
-.heatmap-cell.heatmap-int-1 { background: rgba(88, 166, 255, 0.18); }
-.heatmap-cell.heatmap-int-2 { background: rgba(88, 166, 255, 0.35); }
-.heatmap-cell.heatmap-int-3 { background: rgba(88, 166, 255, 0.55); }
+.heatmap-cell.heatmap-int-1 { background: rgba(0, 161, 224, 0.18); }
+.heatmap-cell.heatmap-int-2 { background: rgba(0, 161, 224, 0.35); }
+.heatmap-cell.heatmap-int-3 { background: rgba(0, 161, 224, 0.55); }
 .heatmap-cell.heatmap-int-4 { background: var(--accent); }
 
-[data-theme="light"] .heatmap-cell.heatmap-int-1 { background: rgba(9, 105, 218, 0.12); }
-[data-theme="light"] .heatmap-cell.heatmap-int-2 { background: rgba(9, 105, 218, 0.28); }
-[data-theme="light"] .heatmap-cell.heatmap-int-3 { background: rgba(9, 105, 218, 0.5); }
-[data-theme="light"] .heatmap-cell.heatmap-int-4 { background: var(--accent); }
+[data-theme="dark"] .heatmap-cell.heatmap-int-1 { background: rgba(0, 161, 224, 0.22); }
+[data-theme="dark"] .heatmap-cell.heatmap-int-2 { background: rgba(0, 161, 224, 0.42); }
+[data-theme="dark"] .heatmap-cell.heatmap-int-3 { background: rgba(0, 161, 224, 0.62); }
+[data-theme="dark"] .heatmap-cell.heatmap-int-4 { background: var(--accent); }
 
 /* Tooltip */
 .heatmap-tooltip-area {

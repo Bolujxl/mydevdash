@@ -1,44 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Source+Code+Pro:wght@400;600;700&display=swap');
 
 :root {
-  /* ── Color System ── */
-  --bg-root: #000000;
-  --bg-surface: #0a0a0a;
-  --bg-input: #000000;
-  --bg-hover: rgba(255, 255, 255, 0.05);
-  --text-primary: #f8fafc;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  --text-tertiary: #4b5563;
-  --border-primary: #262626;
-  --border-secondary: #171717;
-  --accent: #58a6ff;
-  --accent-hover: #79b8ff;
-  --accent-bg: rgba(88, 166, 255, 0.1);
-  --accent-bg-hover: rgba(88, 166, 255, 0.18);
-  --accent-border: rgba(88, 166, 255, 0.25);
-  --accent-ring: rgba(88, 166, 255, 0.18);
-  --danger: #f85149;
-  --danger-bg: rgba(248, 81, 73, 0.08);
-  --danger-border: rgba(248, 81, 73, 0.15);
-  --success: #3fb950;
-  --success-bg: rgba(63, 185, 80, 0.1);
-  --warning: #d29922;
-  --warning-bg: rgba(210, 153, 34, 0.1);
-  --purple: #bc8cff;
-  --purple-bg: rgba(188, 140, 255, 0.1);
-  --neutral-bg: rgba(255, 255, 255, 0.06);
-  --scrollbar-track: #000000;
-  --scrollbar-thumb: #262626;
-  --scrollbar-thumb-hover: #404040;
-  --hero-gradient: linear-gradient(135deg, #0a0a0a 0%, #121212 100%);
+  /* ── Color System (Cloud Tower) ── */
+  --bg-root: #ffffff;
+  --bg-surface: #f4f6f9;
+  --bg-input: #ffffff;
+  --bg-hover: rgba(0, 161, 224, 0.06);
+  --text-primary: #032d60;
+  --text-secondary: #706e6b;
+  --text-muted: #8b959e;
+  --text-tertiary: #a0aec0;
+  --border-primary: #d8dde6;
+  --border-secondary: #e8ecf0;
+  --accent: #00a1e0;
+  --accent-hover: #0088c7;
+  --accent-bg: rgba(0, 161, 224, 0.08);
+  --accent-bg-hover: rgba(0, 161, 224, 0.15);
+  --accent-border: rgba(0, 161, 224, 0.2);
+  --accent-ring: rgba(0, 161, 224, 0.12);
+  --danger: #c23934;
+  --danger-bg: rgba(194, 57, 52, 0.06);
+  --danger-border: rgba(194, 57, 52, 0.12);
+  --success: #04844b;
+  --success-bg: rgba(4, 132, 75, 0.08);
+  --warning: #ff9a3c;
+  --warning-bg: rgba(255, 154, 60, 0.08);
+  --purple: #8250df;
+  --purple-bg: rgba(130, 80, 223, 0.08);
+  --neutral-bg: rgba(3, 45, 96, 0.04);
+  --scrollbar-track: #f4f6f9;
+  --scrollbar-thumb: #d8dde6;
+  --scrollbar-thumb-hover: #a0aec0;
+  --hero-gradient: linear-gradient(135deg, #f4f6f9 0%, #e8ecf0 100%);
 
-  /* ── Shadow Tokens ── */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.45), 0 4px 8px rgba(0, 0, 0, 0.3);
-  --shadow-accent: 0 4px 20px rgba(88, 166, 255, 0.15);
+  /* ── Shadow Tokens (Cloud Tower elevation levels) ── */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.07);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-accent: 0 4px 20px rgba(0, 161, 224, 0.12);
 
   /* ── Border Radius Tokens (Cloud Tower) ── */
   --radius-xs: 3px;
@@ -65,44 +65,43 @@
   --sidebar-width: 248px;
 }
 
-[data-theme="light"] {
-  --bg-root: #f9fafb;
-  --bg-surface: #ffffff;
-  --bg-input: #f3f4f6;
-  --bg-hover: rgba(208, 215, 222, 0.35);
-  --text-primary: #1f2328;
-  --text-secondary: #656d76;
-  --text-muted: #6e7681;
-  --text-tertiary: #8c959f;
-  --border-primary: #d0d7de;
-  --border-secondary: #e8ecef;
-  --accent: #0969da;
-  --accent-hover: #0550ae;
-  --accent-bg: rgba(9, 105, 218, 0.08);
-  --accent-bg-hover: rgba(9, 105, 218, 0.15);
-  --accent-border: rgba(9, 105, 218, 0.2);
-  --accent-ring: rgba(9, 105, 218, 0.12);
-  --danger: #cf222e;
-  --danger-bg: rgba(207, 34, 46, 0.06);
-  --danger-border: rgba(207, 34, 46, 0.12);
-  --success: #1a7f37;
-  --success-bg: rgba(26, 127, 55, 0.08);
-  --warning: #9a6700;
-  --warning-bg: rgba(154, 103, 0, 0.08);
-  --purple: #8250df;
-  --purple-bg: rgba(130, 80, 223, 0.08);
-  --neutral-bg: rgba(31, 35, 40, 0.06);
-  --scrollbar-track: #f0f2f5;
-  --scrollbar-thumb: #d0d7de;
-  --scrollbar-thumb-hover: #8c959f;
-  --hero-gradient: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+[data-theme="dark"] {
+  --bg-root: #032d60;
+  --bg-surface: #022048;
+  --bg-input: #011838;
+  --bg-hover: rgba(255, 255, 255, 0.06);
+  --text-primary: #f4f6f9;
+  --text-secondary: #a0aec0;
+  --text-muted: #6b7b8d;
+  --text-tertiary: #4a5a6e;
+  --border-primary: rgba(255, 255, 255, 0.08);
+  --border-secondary: rgba(255, 255, 255, 0.05);
+  --accent: #00a1e0;
+  --accent-hover: #2cb8f0;
+  --accent-bg: rgba(0, 161, 224, 0.12);
+  --accent-bg-hover: rgba(0, 161, 224, 0.2);
+  --accent-border: rgba(0, 161, 224, 0.25);
+  --accent-ring: rgba(0, 161, 224, 0.15);
+  --danger: #e5534b;
+  --danger-bg: rgba(229, 83, 75, 0.12);
+  --danger-border: rgba(229, 83, 75, 0.2);
+  --success: #05a35c;
+  --success-bg: rgba(5, 163, 92, 0.12);
+  --warning: #ff9a3c;
+  --warning-bg: rgba(255, 154, 60, 0.12);
+  --purple: #9f7aea;
+  --purple-bg: rgba(159, 122, 234, 0.12);
+  --neutral-bg: rgba(255, 255, 255, 0.04);
+  --scrollbar-track: #022048;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.1);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.18);
+  --hero-gradient: linear-gradient(135deg, #022048 0%, #011838 100%);
 
-  /* ── Shadow Tokens (light) ── */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
-  --shadow-accent: 0 4px 20px rgba(9, 105, 218, 0.12);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-accent: 0 4px 20px rgba(0, 161, 224, 0.15);
 }
 
 *,
@@ -136,10 +135,6 @@ a {
   a:hover {
     color: var(--accent-hover);
   }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--scrollbar-thumb-hover);
-  }
 }
 
 input,
@@ -149,7 +144,6 @@ textarea {
   font-family: inherit;
 }
 
-/* ── Custom Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -164,6 +158,8 @@ textarea {
   border-radius: 100px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
+@media (hover: hover) {
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
 }
