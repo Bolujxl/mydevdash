@@ -67,10 +67,9 @@ function Dashboard() {
 
   const filteredEvents = useMemo(() => {
     if (!Array.isArray(events)) return []
-    const now = Date.now()
-    const ranges = { '7d': 7, '30d': 30, '3mo': 90 }
-    const cutoff = now - ranges[timeRange] * 24 * 60 * 60 * 1000
-    return events.filter((e) => new Date(e.created_at).getTime() > cutoff)
+    const cutoff = new Date()
+    cutoff.setDate(cutoff.getDate() - ({ '7d': 7, '30d': 30, '3mo': 90 }[timeRange]))
+    return events.filter((e) => new Date(e.created_at) > cutoff)
   }, [events, timeRange])
 
   const contributionStats = useMemo(() => {
