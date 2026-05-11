@@ -111,7 +111,7 @@ function ActivityPage() {
           </div>
         </div>
         <div className="code-stat-card">
-          <GitFork size={16} />
+          <Activity size={16} />
           <div>
             <span className="code-stat-label">Avg pushes / week</span>
             <span className="code-stat-value">{codeStats.avgCommits}</span>
