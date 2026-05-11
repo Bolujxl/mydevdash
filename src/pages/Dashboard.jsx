@@ -11,21 +11,6 @@ import '../styles/Dashboard.css'
 
 const GH_USER_KEY = 'devdash_github_user'
 
-function getGreeting() {
-  const hour = new Date().getHours()
-  if (hour < 12) return 'morning'
-  if (hour < 18) return 'afternoon'
-  return 'evening'
-}
-
-function getSavedUsername() {
-  try {
-    return localStorage.getItem(GH_USER_KEY) || 'bolujxl'
-  } catch {
-    return 'bolujxl'
-  }
-}
-
 function Dashboard() {
   const [completedCount] = useState(() => {
     try {
@@ -189,7 +174,7 @@ function Dashboard() {
                   </div>
                   <div>
                     <h1 className="hero-greeting">
-                      Good {getGreeting()}, <span className="highlight-name">{profile.name || profile.login}</span>
+                      Hi, <span className="highlight-name">{profile.name || profile.login}</span>
                     </h1>
                     <p className="hero-login">@{profile.login}</p>
                   </div>
