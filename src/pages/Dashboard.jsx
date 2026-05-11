@@ -11,6 +11,14 @@ import '../styles/Dashboard.css'
 
 const GH_USER_KEY = 'devdash_github_user'
 
+function getSavedUsername() {
+  try {
+    return localStorage.getItem(GH_USER_KEY) || 'bolujxl'
+  } catch {
+    return 'bolujxl'
+  }
+}
+
 function Dashboard() {
   const [completedCount] = useState(() => {
     try {
