@@ -9,10 +9,8 @@ function buildGrid(events, range) {
   const pushMap = {}
   if (Array.isArray(events)) {
     for (const e of events) {
-      if (e.type === 'PushEvent') {
-        const date = e.created_at?.slice(0, 10)
-        if (date) pushMap[date] = (pushMap[date] || 0) + 1
-      }
+      const date = e.created_at?.slice(0, 10)
+      if (date) pushMap[date] = (pushMap[date] || 0) + 1
     }
   }
 
