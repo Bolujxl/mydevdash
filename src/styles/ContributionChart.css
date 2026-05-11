@@ -6,7 +6,7 @@
   background: var(--bg-surface);
   border: 1px solid var(--border-secondary);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: var(--space-5);
   width: 100%;
   margin-top: 1.5rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;

@@ -16,7 +16,7 @@
 }
 
 .content-wrapper {
-  max-width: 1200px;
+  max-width: var(--container-max);
   width: 100%;
 }
 
