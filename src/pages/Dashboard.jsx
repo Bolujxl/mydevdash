@@ -236,8 +236,10 @@ function Dashboard() {
                   <CheckCircle2 size={20} />
                 </div>
                 <div className="stat-card-body">
-                  <span className="stat-card-value">{completedCount}</span>
-                  <span className="stat-card-label">Tasks done</span>
+                  <div className="streak-main">
+                    <span className="stat-card-value">{completedCount}</span>
+                    <span className="stat-card-label">Tasks done</span>
+                  </div>
                   <p className="stat-copy">{completedCount > 0 ? 'Keep the momentum.' : 'Ready to begin?'}</p>
                 </div>
               </div>
@@ -246,8 +248,10 @@ function Dashboard() {
                   <Star size={20} />
                 </div>
                 <div className="stat-card-body">
-                  <span className="stat-card-value">{totalStars.toLocaleString()}</span>
-                  <span className="stat-card-label">Total stars</span>
+                  <div className="streak-main">
+                    <span className="stat-card-value">{totalStars.toLocaleString()}</span>
+                    <span className="stat-card-label">Total stars</span>
+                  </div>
                   <p className="stat-copy">{totalStars > 0 ? 'Your work is valued.' : 'Ship something great.'}</p>
                 </div>
               </div>
@@ -256,10 +260,12 @@ function Dashboard() {
                   <FolderGit2 size={20} />
                 </div>
                 <div className="stat-card-body">
-                  <span className="stat-card-value">
-                    {reposLoading ? '...' : uniqueLanguages}
-                  </span>
-                  <span className="stat-card-label">Languages used</span>
+                  <div className="streak-main">
+                    <span className="stat-card-value">
+                      {reposLoading ? '...' : uniqueLanguages}
+                    </span>
+                    <span className="stat-card-label">Languages used</span>
+                  </div>
                   <p className="stat-copy">{uniqueLanguages > 1 ? 'A versatile stack.' : 'Specialize and grow.'}</p>
                 </div>
               </div>
