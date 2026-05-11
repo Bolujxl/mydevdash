@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { ClipboardList, CheckCircle2, ListTodo } from 'lucide-react'
 import TaskItem from '../components/TaskItem'
+import ProgressBar from '../components/ProgressBar'
 import '../styles/Tasks.css'
 
 const STORAGE_KEY = 'devdash_tasks'
@@ -14,7 +15,8 @@ function Tasks() {
       return []
     }
   })
-  const [newTask, setNewTask] = useState('')
+  const [taskText, setTaskText] = useState('')
+  const [taskNote, setTaskNote] = useState('')
   const [filterTab, setFilterTab] = useState('all')
 
   useEffect(() => {
@@ -23,17 +25,25 @@ function Tasks() {
 
   const handleAddTask = (e) => {
     e.preventDefault()
-    if (!newTask.trim()) return
+    if (!taskText.trim()) return
 
     const task = {
       id: Date.now(),
-      text: newTask.trim(),
+      text: taskText.trim(),
+      note: taskNote.trim() || null,
       done: false,
       createdAt: new Date().toISOString(),
     }
 
     setTasks((prev) => [task, ...prev])
-    setNewTask('')
+    setTaskText('')
+    setTaskNote('')
+  }
+
+  const handleKeyDown = (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      handleAddTask(e)
+    }
   }
 
   const handleToggle = (id) => {
@@ -52,7 +62,10 @@ function Tasks() {
     return true
   })
 
-  const remaining = tasks.filter((t) => !t.done).length
+  const doneCount = tasks.filter((t) => t.done).length
+  const activeCount = tasks.filter((t) => !t.done).length
+  const allCount = tasks.length
+  const completedCount = tasks.filter((t) => t.done).length
 
   return (
     <div className="tasks-page">
@@ -61,31 +74,51 @@ function Tasks() {
         Task Manager
       </h1>
 
-      <form className="task-form" onSubmit={handleAddTask}>
+      <form className="task-entry-card" onSubmit={handleAddTask} onKeyDown={handleKeyDown}>
         <input
           type="text"
-          className="task-input"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          placeholder="What needs to be done?"
+          className="task-entry-title"
+          value={taskText}
+          onChange={(e) => setTaskText(e.target.value)}
+          placeholder="What do you need to get done?"
+          autoFocus
         />
-        <button type="submit" className="task-add-btn">Add</button>
+        <input
+          type="text"
+          className="task-entry-note"
+          value={taskNote}
+          onChange={(e) => setTaskNote(e.target.value.slice(0, 120))}
+          placeholder="Add a short note (optional)"
+          maxLength={120}
+        />
+        <div className="task-entry-footer">
+          <span className="task-entry-hint">Ctrl + Enter to submit</span>
+          <button
+            type="submit"
+            className="task-add-btn"
+            disabled={!taskText.trim()}
+          >
+            Add Task
+          </button>
+        </div>
       </form>
 
+      {allCount > 0 && <ProgressBar done={doneCount} total={allCount} />}
+
       <div className="task-filters">
-        {['all', 'active', 'completed'].map((tab) => (
+        {[
+          { key: 'all', label: 'All', count: allCount },
+          { key: 'active', label: 'Active', count: activeCount },
+          { key: 'completed', label: 'Completed', count: completedCount },
+        ].map((tab) => (
           <button
-            key={tab}
-            className={`filter-btn ${filterTab === tab ? 'active' : ''}`}
-            onClick={() => setFilterTab(tab)}
+            key={tab.key}
+            className={`filter-btn ${filterTab === tab.key ? 'active' : ''}`}
+            onClick={() => setFilterTab(tab.key)}
           >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {tab.label} ({tab.count})
           </button>
         ))}
-      </div>
-
-      <div className="task-count">
-        {remaining} task{remaining !== 1 ? 's' : ''} remaining
       </div>
 
       <div className="task-list">
