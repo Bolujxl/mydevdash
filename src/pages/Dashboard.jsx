@@ -63,12 +63,22 @@ function Dashboard() {
     return repos.slice(0, 4)
   }, [repos])
 
+  const [timeRange, setTimeRange] = useState('30d')
+
+  const filteredEvents = useMemo(() => {
+    if (!Array.isArray(events)) return []
+    const now = Date.now()
+    const ranges = { '7d': 7, '30d': 30, '3mo': 90 }
+    const cutoff = now - ranges[timeRange] * 24 * 60 * 60 * 1000
+    return events.filter((e) => new Date(e.created_at).getTime() > cutoff)
+  }, [events, timeRange])
+
   const contributionStats = useMemo(() => {
-    if (!Array.isArray(events)) return null
+    if (!Array.isArray(filteredEvents)) return null
     let pushes = 0
     let prs = 0
     let issues = 0
-    for (const e of events) {
+    for (const e of filteredEvents) {
       if (e.type === 'PushEvent') pushes++
       if (e.type === 'PullRequestEvent' && e.payload?.action === 'opened') prs++
       if (e.type === 'IssuesEvent' && e.payload?.action === 'opened') issues++
@@ -77,8 +87,9 @@ function Dashboard() {
     if (pushes) parts.push(`${pushes} pushes`)
     if (prs) parts.push(`${prs} PRs`)
     if (issues) parts.push(`${issues} issues`)
-    return parts.length ? `Recent activity: ${parts.join(' · ')}` : null
-  }, [events])
+    const rangeLabel = { '7d': 'last 7 days', '30d': 'last 30 days', '3mo': 'last 3 months' }
+    return parts.length ? `Recent activity: ${parts.join(' · ')} in ${rangeLabel[timeRange]}` : `No activity in ${rangeLabel[timeRange]}`
+  }, [filteredEvents, timeRange])
 
   const handleSetUsername = (e) => {
     e.preventDefault()
@@ -304,7 +315,7 @@ function Dashboard() {
             </div>
 
             <div className="dash-section bento-activity">
-              <ActivityFeed events={events} summary={contributionStats} />
+              <ActivityFeed events={filteredEvents} summary={contributionStats} timeRange={timeRange} onTimeRangeChange={setTimeRange} />
             </div>
 
             <ContributionChart events={events} />

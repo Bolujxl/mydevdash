@@ -84,37 +84,47 @@ function eventMessage(event) {
   }
 }
 
-function ActivityFeed({ events, summary }) {
-  if (!events || events.length === 0) {
-    return (
-      <div className="activity-feed">
-        <h2 className="activity-title">
-          <GitBranch size={16} /> Recent Activity
-        </h2>
-        <p className="activity-empty">No recent activity to show.</p>
-      </div>
-    )
-  }
+function ActivityFeed({ events, summary, timeRange, onTimeRangeChange }) {
+  const ranges = ['7d', '30d', '3mo']
 
   return (
     <div className="activity-feed">
-      <h2 className="activity-title">
-        <GitBranch size={16} /> Recent Activity
-      </h2>
-      {summary && <p className="activity-summary">{summary}</p>}
-      <div className="activity-list">
-        {events.map((event) => (
-          <div key={event.id} className={`activity-item type-${event.type}`}>
-            <div className="activity-icon-wrap">
-              <EventIcon type={event.type} size={16} />
-            </div>
-            <div className="activity-body">
-              <span className="activity-message">{eventMessage(event)}</span>
-            </div>
-            <span className="activity-time">{getRelativeTime(event.created_at)}</span>
+      <div className="activity-header">
+        <h2 className="activity-title">
+          <GitBranch size={16} /> Recent Activity
+        </h2>
+        {onTimeRangeChange && (
+          <div className="activity-range">
+            {ranges.map((r) => (
+              <button
+                key={r}
+                className={`activity-range-btn ${timeRange === r ? 'active' : ''}`}
+                onClick={() => onTimeRangeChange(r)}
+              >
+                {r}
+              </button>
+            ))}
           </div>
-        ))}
+        )}
       </div>
+      {summary && <p className="activity-summary">{summary}</p>}
+      {!events || events.length === 0 ? (
+        <p className="activity-empty">No activity in this period.</p>
+      ) : (
+        <div className="activity-list">
+          {events.map((event) => (
+            <div key={event.id} className={`activity-item type-${event.type}`}>
+              <div className="activity-icon-wrap">
+                <EventIcon type={event.type} size={16} />
+              </div>
+              <div className="activity-body">
+                <span className="activity-message">{eventMessage(event)}</span>
+              </div>
+              <span className="activity-time">{getRelativeTime(event.created_at)}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
