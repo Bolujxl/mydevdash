@@ -104,11 +104,13 @@ function CommitHeatmap({ events }) {
             ))}
           </div>
         </div>
-        {hovered && (
-          <div className="heatmap-tooltip">
+        <div className="heatmap-tooltip">
+          {hovered ? (
             <span>{hovered.count} commits · {hovered.label}</span>
-          </div>
-        )}
+          ) : (
+            <span className="heatmap-tooltip-placeholder">Hover a day to see activity</span>
+          )}
+        </div>
       </div>
 
       <div className="heatmap-legend">
