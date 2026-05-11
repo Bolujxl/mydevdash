@@ -1,4 +1,5 @@
 import { Star, GitFork } from 'lucide-react'
+import { getLangColor } from '../utils/langColors'
 
 function RepoCard({ repo }) {
   return (
@@ -12,7 +13,10 @@ function RepoCard({ repo }) {
       <div className="repo-meta">
         {repo.language && (
           <span className="repo-language">
-            <span className="language-dot"></span>
+            <span
+              className="language-dot"
+              style={{ background: getLangColor(repo.language) }}
+            />
             {repo.language}
           </span>
         )}
