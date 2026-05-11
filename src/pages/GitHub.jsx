@@ -1,14 +1,25 @@
 import { useState, useMemo } from 'react'
-import { Search, Loader2, MapPin, Users, FolderGit2, Globe } from 'lucide-react'
+import {
+  Search, Loader2, MapPin, Users, FolderGit2, Globe,
+  ChevronRight, X
+} from 'lucide-react'
 import useFetch from '../hooks/useFetch'
 import RepoCard from '../components/RepoCard'
 import '../styles/GitHub.css'
+
+const GHOST_PROFILES = [
+  { name: 'Linus Torvalds', login: 'torvalds', repos: 42, followers: '180k' },
+  { name: 'Dan Abramov',    login: 'gaearon',  repos: 67, followers: '89k'  },
+  { name: 'Sindre Sorhus',  login: 'sindresorhus', repos: 1200, followers: '45k' },
+  { name: 'Addy Osmani',    login: 'addyosmani', repos: 88, followers: '30k' },
+]
 
 function GitHub() {
   const [username, setUsername] = useState('')
   const [searchedUser, setSearchedUser] = useState('')
   const [filter, setFilter] = useState('')
   const [sortBy, setSortBy] = useState('updated')
+  const [selectedLangs, setSelectedLangs] = useState([])
 
   const profileUrl = searchedUser
     ? `https://api.github.com/users/${searchedUser}`
@@ -26,21 +37,34 @@ function GitHub() {
       setSearchedUser(username.trim())
       setFilter('')
       setSortBy('updated')
+      setSelectedLangs([])
     }
   }
 
+  const availableLangs = useMemo(() => {
+    if (!Array.isArray(repos)) return []
+    const langs = [...new Set(repos.map((r) => r.language).filter(Boolean))]
+    return langs.sort()
+  }, [repos])
+
   const filteredRepos = useMemo(() => {
     if (!repos || !Array.isArray(repos)) return []
-    let list = [...repos].filter((r) =>
-      r.name.toLowerCase().includes(filter.toLowerCase())
-    )
+    let list = [...repos]
+      .filter((r) => selectedLangs.length === 0 || selectedLangs.includes(r.language))
+      .filter((r) => r.name.toLowerCase().includes(filter.toLowerCase()))
     if (sortBy === 'stars') {
       list.sort((a, b) => b.stargazers_count - a.stargazers_count)
     } else if (sortBy === 'name') {
       list.sort((a, b) => a.name.localeCompare(b.name))
     }
     return list
-  }, [repos, filter, sortBy])
+  }, [repos, filter, sortBy, selectedLangs])
+
+  const toggleLang = (lang) => {
+    setSelectedLangs((prev) =>
+      prev.includes(lang) ? prev.filter((l) => l !== lang) : [...prev, lang]
+    )
+  }
 
   const loading = profileLoading || reposLoading
   const error = profileError || reposError
@@ -52,24 +76,41 @@ function GitHub() {
         GitHub Explorer
       </h1>
 
-      <form className="github-search" onSubmit={handleSearch}>
-        <Search size={18} className="github-search-icon" />
-        <input
-          type="text"
-          className="github-input"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter GitHub username..."
-        />
-        <button type="submit" className="github-btn">Search</button>
-      </form>
+      {!searchedUser ? (
+        <div className="gh-hero-wrapper">
+          <div className="gh-ghost-cards">
+            {GHOST_PROFILES.map((p, i) => (
+              <div key={p.login} className={`gh-ghost-card gh-ghost-${i}`}>
+                <div className="gh-ghost-avatar" />
+                <div className="gh-ghost-name">{p.name}</div>
+                <div className="gh-ghost-login">@{p.login}</div>
+                <div className="gh-ghost-stats">
+                  <span>{p.repos} repos</span>
+                  <span>{p.followers} followers</span>
+                </div>
+              </div>
+            ))}
+          </div>
 
-      {!searchedUser && (
-        <div className="github-empty">
-          <Search size={48} className="empty-icon" />
-          <p>Search for a GitHub user to explore their profile and repositories.</p>
+          <div className="gh-hero-search">
+            <h2 className="gh-hero-heading">Who are you looking for?</h2>
+            <p className="gh-hero-subtext">Search any GitHub profile to explore their work</p>
+            <form className="gh-hero-form" onSubmit={handleSearch}>
+              <div className="gh-hero-input-wrap">
+                <Search size={18} className="gh-hero-search-icon" />
+                <input
+                  type="text"
+                  className="gh-hero-input"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="username"
+                />
+                <span className="gh-hero-kbd">⏎</span>
+              </div>
+            </form>
+          </div>
         </div>
-      )}
+      ) : null}
 
       {loading && (
         <div className="github-loading">
@@ -78,29 +119,42 @@ function GitHub() {
         </div>
       )}
 
-      {error && !loading && (
-        <div className="github-error">
-          <p>
-            {error.includes('404')
-              ? `User "${searchedUser}" not found. Check the username and try again.`
-              : error}
-          </p>
+      {error && !loading && !profile && (
+        <div className="gh-error-state">
+          <Search size={40} className="gh-error-icon" />
+          <p className="gh-error-text">No developer found for &apos;<strong>{searchedUser}</strong>&apos;</p>
+          <p className="gh-error-sub">Double-check the username and try again</p>
+          <button className="gh-error-back" onClick={() => setSearchedUser('')}>
+            Try another search
+          </button>
         </div>
       )}
 
       {!loading && !error && profile && (
         <>
-          <div className="profile-card">
+          <div className="gh-profile-hero">
             <img
               src={profile.avatar_url}
               alt={profile.name || searchedUser}
-              className="profile-avatar"
+              className="gh-avatar"
             />
-            <div className="profile-info">
-              <h2 className="profile-name">{profile.name || searchedUser}</h2>
-              <p className="profile-login">@{profile.login}</p>
-              {profile.bio && <p className="profile-bio">{profile.bio}</p>}
-              <div className="profile-meta">
+            <div className="gh-profile-body">
+              <div className="gh-profile-top">
+                <div>
+                  <h2 className="gh-profile-name">{profile.name || searchedUser}</h2>
+                  <p className="gh-profile-login">@{profile.login}</p>
+                </div>
+                <a
+                  href={profile.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gh-view-link"
+                >
+                  View on GitHub <ChevronRight size={14} />
+                </a>
+              </div>
+              {profile.bio && <p className="gh-profile-bio">{profile.bio}</p>}
+              <div className="gh-profile-meta">
                 {profile.location && (
                   <span><MapPin size={13} /> {profile.location}</span>
                 )}
@@ -115,7 +169,7 @@ function GitHub() {
             <div className="repos-section">
               <div className="repos-header">
                 <h2 className="section-title">
-                  Repositories ({filteredRepos.length})
+                  {searchedUser}&apos;s repositories ({filteredRepos.length})
                 </h2>
                 <div className="repos-controls">
                   <input
@@ -137,8 +191,23 @@ function GitHub() {
                 </div>
               </div>
 
+              {availableLangs.length > 0 && (
+                <div className="lang-pills">
+                  {availableLangs.map((lang) => (
+                    <button
+                      key={lang}
+                      className={`lang-pill ${selectedLangs.includes(lang) ? 'active' : ''}`}
+                      onClick={() => toggleLang(lang)}
+                    >
+                      {selectedLangs.includes(lang) && <X size={10} />}
+                      {lang}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               {filteredRepos.length === 0 ? (
-                <p className="repos-empty">No repositories match your filter.</p>
+                <p className="repos-empty">No repositories match your filters.</p>
               ) : (
                 <div className="repos-grid">
                   {filteredRepos.map((repo) => (
