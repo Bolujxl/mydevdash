@@ -66,6 +66,8 @@
 .heatmap-grid-wrap {
   position: relative;
   margin-bottom: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .heatmap-grid {
@@ -93,7 +95,7 @@
 .heatmap-cells-wrap {
   display: flex;
   gap: 3px;
-  overflow-x: auto;
+  min-width: fit-content;
 }
 
 .heatmap-week {
@@ -321,11 +323,60 @@
 }
 
 @media (max-width: 768px) {
+  .heatmap-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heatmap-card {
+    padding: var(--space-4);
+  }
+
+  .heatmap-y-labels {
+    margin-right: 0.25rem;
+  }
+
+  .heatmap-day-label {
+    font-size: 0.5rem;
+    width: 20px;
+    height: 12px;
+    line-height: 12px;
+  }
+
+  .heatmap-cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+  }
+
+  .heatmap-week {
+    gap: 2px;
+  }
+
+  .heatmap-cells-wrap {
+    gap: 2px;
+  }
+
   .code-stats-row {
     grid-template-columns: 1fr;
   }
 
-  .heatmap-cells-wrap {
-    max-width: 100%;
+  .repo-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .repo-table {
+    min-width: 600px;
+    font-size: 0.78rem;
+  }
+
+  .repo-table th {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  .repo-table td {
+    padding: 0.5rem 0.5rem;
   }
 }
