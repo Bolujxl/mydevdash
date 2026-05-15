@@ -8,6 +8,7 @@ import WeatherWidget from '../components/WeatherWidget'
 import ActivityFeed from '../components/ActivityFeed'
 import ContributionChart from '../components/ContributionChart'
 import StreakCard from '../components/StreakCard'
+import Silk from '../components/Silk'
 import { getLangColor } from '../utils/langColors'
 import '../styles/Dashboard.css'
 
@@ -138,6 +139,16 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
+      <div className="silk-bg">
+        <Silk
+          speed={5}
+          scale={1}
+          color="#00a1e0"
+          noiseIntensity={1.5}
+          rotation={0}
+        />
+      </div>
+
       {!savedUsername ? (
         <form className="gh-username-form" onSubmit={handleSetUsername}>
           <label className="gh-username-label" htmlFor="gh-username">

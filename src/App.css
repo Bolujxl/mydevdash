@@ -13,11 +13,13 @@
   display: flex;
   justify-content: center;
   padding: 2rem;
+  min-width: 0;
 }
 
 .content-wrapper {
   max-width: var(--container-max);
   width: 100%;
+  min-width: 0;
 }
 
 /* ---- Shared Spinner ---- */
