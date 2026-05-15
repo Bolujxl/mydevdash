@@ -153,9 +153,9 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background: var(--accent);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-radius: 3px 3px 0 0;
 }
 
 /* Decorative radial glow */
@@ -306,17 +306,17 @@
 
 .hero-greeting {
   font-size: 1.55rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
   letter-spacing: -0.04em;
 }
 
 .hero-login {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
-  font-weight: 500;
-  margin-top: 0.2rem;
+  font-weight: 400;
+  margin-top: 2px;
   letter-spacing: -0.01em;
 }
 
@@ -328,63 +328,83 @@
   flex-shrink: 0;
 }
 
-.gh-badge {
+/* Username pill */
+.hero-username-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 12px;
   border-radius: var(--radius-pill);
-  padding: 0.3rem 0.8rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--accent);
+  border: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+  background: transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+  font-family: inherit;
 }
 
 @media (hover: hover) {
-  .gh-badge:hover {
-    background: var(--accent-bg-hover);
+  .hero-username-pill:hover {
     border-color: var(--accent);
+    color: var(--text-primary);
   }
 
-  .gh-badge:hover .gh-badge-x {
+  .hero-username-pill:hover .pill-edit-icon {
     opacity: 1;
-    color: var(--danger);
   }
 }
 
-.gh-badge-x {
+.pill-edit-icon {
   font-size: 0.7rem;
   opacity: 0.5;
   transition: opacity 0.15s ease;
 }
 
-.hero-gh-link {
+.hero-username-input-wrap {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.35rem 0.9rem;
-  background: var(--neutral-bg);
-  border: 1px solid var(--border-primary);
+}
+
+.hero-username-input {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 12px;
   border-radius: var(--radius-pill);
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--text-primary);
+  outline: none;
+  width: 140px;
+  font-family: inherit;
+}
+
+.hero-username-input::placeholder {
   color: var(--text-secondary);
-  font-size: 0.78rem;
-  font-weight: 600;
+  opacity: 0.5;
+}
+
+/* GitHub CTA button */
+.hero-github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  cursor: pointer;
   text-decoration: none;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  letter-spacing: -0.01em;
+  transition: background 0.15s ease;
 }
 
 @media (hover: hover) {
-  .hero-gh-link:hover {
-    color: var(--text-primary);
-    border-color: var(--accent);
+  .hero-github-btn:hover {
     background: var(--accent-bg);
-    text-decoration: none;
   }
 }
 

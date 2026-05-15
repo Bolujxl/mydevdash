@@ -32,6 +32,8 @@ function Dashboard() {
   })
   const [usernameInput, setUsernameInput] = useState('')
   const [savedUsername, setSavedUsername] = useState(getSavedUsername)
+  const [editing, setEditing] = useState(false)
+  const [pillInput, setPillInput] = useState('')
 
   const profileUrl = savedUsername
     ? `https://api.github.com/users/${savedUsername}`
@@ -104,6 +106,32 @@ function Dashboard() {
     try {
       localStorage.removeItem(GH_USER_KEY)
     } catch { /* noop */ }
+  }
+
+  const handlePillKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      const trimmed = pillInput.trim()
+      if (trimmed && trimmed !== savedUsername) {
+        try { localStorage.setItem(GH_USER_KEY, trimmed) } catch { /* noop */ }
+        window.location.reload()
+      }
+      setEditing(false)
+      setPillInput('')
+    }
+    if (e.key === 'Escape') {
+      setEditing(false)
+      setPillInput('')
+    }
+  }
+
+  const handlePillBlur = () => {
+    setEditing(false)
+    setPillInput('')
+  }
+
+  const openPillEditor = () => {
+    setPillInput(savedUsername)
+    setEditing(true)
   }
 
   const loading = profileLoading || reposLoading
@@ -195,15 +223,31 @@ function Dashboard() {
                     <p className="hero-login">@{profile.login}</p>
                   </div>
                   <div className="hero-actions">
-                    <span className="gh-badge" title="Change user" onClick={handleChangeUsername}>
-                      {savedUsername}
-                      <span className="gh-badge-x">×</span>
-                    </span>
+                    {editing ? (
+                      <div className="hero-username-input-wrap">
+                        <input
+                          className="hero-username-input"
+                          type="text"
+                          value={pillInput}
+                          onChange={(e) => setPillInput(e.target.value)}
+                          onKeyDown={handlePillKeyDown}
+                          onBlur={handlePillBlur}
+                          autoFocus
+                          placeholder="github username"
+                          spellCheck={false}
+                        />
+                      </div>
+                    ) : (
+                      <button className="hero-username-pill" onClick={openPillEditor}>
+                        <span className="pill-edit-icon">✎</span>
+                        {savedUsername}
+                      </button>
+                    )}
                     <a
                       href={profile.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hero-gh-link"
+                      className="hero-github-btn"
                     >
                       GitHub <ChevronRight size={14} />
                     </a>
