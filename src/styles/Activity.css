@@ -323,6 +323,15 @@
 }
 
 @media (max-width: 768px) {
+  .heatmap-grid-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .heatmap-grid-wrap::-webkit-scrollbar {
+    height: 3px;
+  }
+
   .heatmap-header {
     flex-direction: column;
     align-items: flex-start;
@@ -339,13 +348,13 @@
   .heatmap-day-label {
     font-size: 0.5rem;
     width: 20px;
-    height: 12px;
-    line-height: 12px;
+    height: 10px;
+    line-height: 10px;
   }
 
   .heatmap-cell {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 2px;
   }
 
@@ -361,22 +370,56 @@
     grid-template-columns: 1fr;
   }
 
+  /* Repo table → cards */
   .repo-table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: visible;
   }
 
-  .repo-table {
-    min-width: 600px;
-    font-size: 0.78rem;
+  .repo-table thead {
+    display: none;
   }
 
-  .repo-table th {
-    padding: 0.5rem 0.5rem;
-    font-size: 0.65rem;
+  .repo-table,
+  .repo-table tbody,
+  .repo-table tr,
+  .repo-table td {
+    display: block;
+  }
+
+  .repo-table tr {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    margin-bottom: 0.75rem;
   }
 
   .repo-table td {
-    padding: 0.5rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--border-secondary);
+    font-size: 0.8rem;
+    white-space: normal;
+  }
+
+  .repo-table td:last-child {
+    border-bottom: none;
+  }
+
+  .repo-table td::before {
+    content: attr(data-label);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .repo-table td.num {
+    text-align: left;
+    font-family: inherit;
   }
 }

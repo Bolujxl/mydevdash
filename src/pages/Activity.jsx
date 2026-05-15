@@ -144,12 +144,12 @@ function ActivityPage() {
                 const badge = getActivityBadge(repo)
                 return (
                   <tr key={repo.id}>
-                    <td>
+                    <td data-label="Repository">
                       <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="repo-table-name">
                         {repo.name}
                       </a>
                     </td>
-                    <td>
+                    <td data-label="Language">
                       {repo.language ? (
                         <span className="repo-table-lang">
                           <span className="lang-dot" style={{ background: getLangColor(repo.language) }} />
@@ -157,9 +157,9 @@ function ActivityPage() {
                         </span>
                       ) : '—'}
                     </td>
-                    <td className="num"><Star size={12} /> {repo.stargazers_count}</td>
-                    <td>{getRelativeTime(repo.pushed_at)}</td>
-                    <td><span className={`repo-badge ${badge.class}`}>{badge.label}</span></td>
+                    <td className="num" data-label="Stars"><Star size={12} /> {repo.stargazers_count}</td>
+                    <td data-label="Last pushed">{getRelativeTime(repo.pushed_at)}</td>
+                    <td data-label="Status"><span className={`repo-badge ${badge.class}`}>{badge.label}</span></td>
                   </tr>
                 )
               })}
