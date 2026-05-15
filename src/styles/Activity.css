@@ -68,11 +68,13 @@
   margin-bottom: 0.5rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 
 .heatmap-grid {
   display: flex;
   gap: 0;
+  min-width: fit-content;
 }
 
 .heatmap-y-labels {
