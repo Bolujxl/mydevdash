@@ -29,8 +29,8 @@ function Navbar() {
 
         <div className="sidebar-brand">
           <svg
-            width="28"
-            height="28"
+            width="34"
+            height="34"
             viewBox="0 0 40 40"
             xmlns="http://www.w3.org/2000/svg"
             aria-label="myDen logo"
