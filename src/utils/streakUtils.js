@@ -19,54 +19,57 @@ export function loadStreak() {
 }
 
 export function recalcStreak(completedCount, events) {
-  const streak = loadStreak()
+  const activeDates = new Set()
   const today = todayStr()
   const yesterday = yesterdayStr()
 
-  const activeToday = isActiveToday(events)
+  // 1. Collect dates from GitHub events
+  if (Array.isArray(events)) {
+    events.forEach(e => {
+      if (e.created_at) activeDates.add(e.created_at.slice(0, 10))
+    })
+  }
 
-  if (activeToday) {
-    if (streak.lastDate === yesterday) {
-      // Consecutive day — streak continues
-      streak.current++
-    } else if (streak.lastDate !== today) {
-      // Not consecutive — start new streak
-      streak.current = 1
+  // 2. Collect dates from Task completions
+  try {
+    const tasks = JSON.parse(localStorage.getItem('devdash_tasks')) || []
+    tasks.forEach(t => {
+      if (t.done && t.doneAt) activeDates.add(t.doneAt.slice(0, 10))
+    })
+  } catch { /* noop */ }
+
+  // 3. Calculate consecutive days starting from today or yesterday
+  let current = 0
+  let checkDate = new Date()
+  
+  // If not active today, start checking from yesterday
+  if (!activeDates.has(today)) {
+    checkDate.setDate(checkDate.getDate() - 1)
+  }
+
+  // Count backwards as long as we find consecutive active dates
+  while (true) {
+    const dStr = checkDate.toISOString().slice(0, 10)
+    if (activeDates.has(dStr)) {
+      current++
+      checkDate.setDate(checkDate.getDate() - 1)
+    } else {
+      break
     }
-    streak.lastDate = today
-  } else if (streak.lastDate && streak.lastDate !== today && streak.lastDate !== yesterday) {
-    // Inactive today AND not active yesterday either — reset
-    streak.current = 0
   }
 
-  if (streak.current > streak.longest) {
-    streak.longest = streak.current
+  // 4. Update longest streak in storage
+  const streak = loadStreak()
+  streak.current = current
+  if (current > streak.longest) {
+    streak.longest = current
   }
-
+  
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(streak))
   } catch { /* noop */ }
 
   return streak
-}
-
-function isActiveToday(events) {
-  const today = todayStr()
-
-  // Check GitHub events from today
-  if (Array.isArray(events)) {
-    for (const e of events) {
-      if (e.created_at?.slice(0, 10) === today) return true
-    }
-  }
-
-  // Check tasks completed today
-  try {
-    const tasks = JSON.parse(localStorage.getItem('devdash_tasks')) || []
-    if (tasks.some((t) => t.done && t.createdAt?.slice(0, 10) === today)) return true
-  } catch { /* noop */ }
-
-  return false
 }
 
 export function getStreakCopy(current) {

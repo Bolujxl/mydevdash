@@ -48,7 +48,11 @@ function Tasks() {
 
   const handleToggle = (id) => {
     setTasks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
+      prev.map((t) =>
+        t.id === id
+          ? { ...t, done: !t.done, doneAt: !t.done ? new Date().toISOString() : null }
+          : t
+      )
     )
   }
 
