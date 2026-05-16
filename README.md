@@ -4,7 +4,7 @@
 
 `myDen` is a personal developer dashboard built for focus and aesthetic pleasure. It aggregates your GitHub activity, task lists, and local environment data into a single, high-fidelity "Bento Box" interface. No clutter, no distractions—just your data, beautifully rendered.
 
-![myDen Preview](https://github.com/Bolujxl/mydevdash/raw/main/preview.png) *(Placeholder for your actual preview image)*
+![myDen Preview](./preview.png)
 
 ---
 
