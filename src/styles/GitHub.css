@@ -503,6 +503,8 @@
   }
 
   .gh-ghost-card {
-    display: none;
+    opacity: 0.3;
+    filter: blur(4px);
+    width: 180px;
   }
 }
