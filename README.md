@@ -64,7 +64,7 @@ The app is driven by a custom-built hook architecture that prioritizes efficienc
 
 1. **Clone the den:**
    ```bash
-   git clone https://github.com/Bolujxl/mydevdash.git
+   git clone https://github.com/Bolujxl/mydendash.git
    ```
 2. **Install dependencies:**
    ```bash
