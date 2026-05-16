@@ -52,11 +52,20 @@ export function recalcStreak(completedCount, events) {
 
 function isActiveToday(events) {
   const today = todayStr()
+
+  // Check GitHub events from today
   if (Array.isArray(events)) {
     for (const e of events) {
       if (e.created_at?.slice(0, 10) === today) return true
     }
   }
+
+  // Check tasks completed today
+  try {
+    const tasks = JSON.parse(localStorage.getItem('devdash_tasks')) || []
+    if (tasks.some((t) => t.done && t.createdAt?.slice(0, 10) === today)) return true
+  } catch { /* noop */ }
+
   return false
 }
 
