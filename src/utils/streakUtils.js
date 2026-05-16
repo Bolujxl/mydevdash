@@ -4,37 +4,43 @@ function todayStr() {
   return new Date().toISOString().slice(0, 10)
 }
 
+function yesterdayStr() {
+  const d = new Date()
+  d.setDate(d.getDate() - 1)
+  return d.toISOString().slice(0, 10)
+}
+
 export function loadStreak() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) return JSON.parse(raw)
   } catch { /* noop */ }
-  return { currentStreak: 0, longestStreak: 0, lastActiveDate: null, history: {} }
+  return { current: 0, longest: 0, lastDate: null }
 }
 
-export function recalcStreak(completedTasks, events) {
+export function recalcStreak(completedCount, events) {
   const streak = loadStreak()
   const today = todayStr()
+  const yesterday = yesterdayStr()
 
-  const wasActiveToday = checkActiveToday(completedTasks, events, streak)
-  const wasActiveYesterday = streak.lastActiveDate === yesterdayStr()
+  const activeToday = isActiveToday(events)
 
-  if (wasActiveToday) {
-    streak.history[today] = true
-    if (streak.lastActiveDate !== today) {
-      if (streak.lastActiveDate === yesterdayStr()) {
-        streak.currentStreak++
-      } else if (!wasActiveYesterday && streak.lastActiveDate !== today) {
-        streak.currentStreak = 1
-      }
-      streak.lastActiveDate = today
+  if (activeToday) {
+    if (streak.lastDate === yesterday) {
+      // Consecutive day — streak continues
+      streak.current++
+    } else if (streak.lastDate !== today) {
+      // Not consecutive — start new streak
+      streak.current = 1
     }
-  } else if (!wasActiveYesterday && streak.lastActiveDate && streak.lastActiveDate !== today) {
-    streak.currentStreak = 0
+    streak.lastDate = today
+  } else if (streak.lastDate && streak.lastDate !== today && streak.lastDate !== yesterday) {
+    // Inactive today AND not active yesterday either — reset
+    streak.current = 0
   }
 
-  if (streak.currentStreak > streak.longestStreak) {
-    streak.longestStreak = streak.currentStreak
+  if (streak.current > streak.longest) {
+    streak.longest = streak.current
   }
 
   try {
@@ -44,32 +50,14 @@ export function recalcStreak(completedTasks, events) {
   return streak
 }
 
-function checkActiveToday(completedTasks, events) {
+function isActiveToday(events) {
   const today = todayStr()
-
-  if (completedTasks > 0) {
-    try {
-      const tasks = JSON.parse(localStorage.getItem('devdash_tasks')) || []
-      const doneToday = tasks.filter((t) => t.done && t.createdAt?.slice(0, 10) === today).length
-      if (doneToday > 0) return true
-    } catch { /* noop */ }
-  }
-
   if (Array.isArray(events)) {
     for (const e of events) {
-      if (e.created_at?.slice(0, 10) === today) {
-        return true
-      }
+      if (e.created_at?.slice(0, 10) === today) return true
     }
   }
-
   return false
-}
-
-function yesterdayStr() {
-  const d = new Date()
-  d.setDate(d.getDate() - 1)
-  return d.toISOString().slice(0, 10)
 }
 
 export function getStreakCopy(current) {

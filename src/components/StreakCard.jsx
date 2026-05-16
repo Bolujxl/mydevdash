@@ -24,7 +24,7 @@ function FlameIcon({ glowing }) {
 function StreakCard({ completedCount, events }) {
   const streak = useMemo(() => recalcStreak(completedCount, events), [completedCount, events])
   const copy = getStreakCopy(streak.currentStreak)
-  const glowing = streak.currentStreak >= 7
+  const glowing = streak.current >= 7
 
   return (
     <div className="stat-card stat-card--streak">
@@ -33,7 +33,7 @@ function StreakCard({ completedCount, events }) {
       </div>
       <div className="stat-card-body">
         <div className="streak-main">
-          <span className="stat-card-value">{streak.currentStreak}</span>
+          <span className="stat-card-value">{streak.current}</span>
           <span className="stat-card-label">DAY STREAK</span>
         </div>
         <p className="streak-copy">{copy}</p>
