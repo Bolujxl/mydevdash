@@ -132,6 +132,17 @@ function GitHub() {
 
       {!loading && !error && profile && (
         <>
+          <form className="gh-re-search" onSubmit={handleSearch}>
+            <Search size={16} />
+            <input
+              type="text"
+              className="gh-re-search-input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Search another user..."
+            />
+          </form>
+
           <div className="gh-profile-hero">
             <img
               src={profile.avatar_url}
