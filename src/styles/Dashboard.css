@@ -158,7 +158,6 @@
   align-items: flex-start;
 }
 
-/* Decorative accent stripe */
 .hero-card::before {
   content: '';
   position: absolute;
@@ -170,7 +169,6 @@
   border-radius: 3px 3px 0 0;
 }
 
-/* Decorative radial glow */
 .hero-card::after {
   content: '';
   position: absolute;
@@ -217,7 +215,6 @@
   gap: 1.25rem;
 }
 
-/* ---- Status Dot ---- */
 .status-dot {
   position: absolute;
   bottom: 0;
@@ -245,7 +242,6 @@
   }
 }
 
-/* ---- CLI Header ---- */
 .cli-header {
   display: flex;
   align-items: center;
@@ -274,7 +270,6 @@
 .cli-dot.yellow { background: #ffbd2e; }
 .cli-dot.green { background: #27c93f; }
 
-/* ---- Hero Inline Stats ---- */
 .hero-inline-stats {
   display: flex;
   align-items: center;
@@ -340,7 +335,6 @@
   flex-shrink: 0;
 }
 
-/* Username pill */
 .hero-username-pill {
   display: inline-flex;
   align-items: center;
@@ -362,21 +356,6 @@
     border-color: var(--accent);
     color: var(--text-primary);
   }
-
-  .hero-username-pill:hover .pill-edit-icon {
-    opacity: 1;
-  }
-}
-
-.pill-edit-icon {
-  font-size: 0.7rem;
-  opacity: 0.5;
-  transition: opacity 0.15s ease;
-}
-
-.hero-username-input-wrap {
-  display: inline-flex;
-  align-items: center;
 }
 
 .hero-username-input {
@@ -392,12 +371,6 @@
   font-family: inherit;
 }
 
-.hero-username-input::placeholder {
-  color: var(--text-secondary);
-  opacity: 0.5;
-}
-
-/* GitHub CTA button */
 .hero-github-btn {
   display: inline-flex;
   align-items: center;
@@ -420,7 +393,6 @@
   }
 }
 
-/* ---- Hero Stats Row ---- */
 .hero-numbers {
   display: flex;
   gap: 0.75rem;
@@ -439,17 +411,6 @@
   color: var(--text-secondary);
   font-size: 0.9rem;
   transition: all 0.2s ease;
-}
-
-@media (hover: hover) {
-  .hero-number:hover {
-    border-color: var(--border-primary);
-    background: var(--bg-hover);
-  }
-}
-
-.hero-number svg {
-  color: var(--text-tertiary);
 }
 
 .hero-number span {
@@ -487,7 +448,6 @@
   overflow: hidden;
 }
 
-/* Bottom accent line on stat cards */
 .stat-card::after {
   content: '';
   position: absolute;
@@ -503,7 +463,8 @@
 .stat-card--green::after  { background: var(--success); }
 .stat-card--blue::after   { background: var(--accent); }
 .stat-card--purple::after { background: var(--purple); }
-.stat-card--amber::after  { background: var(--warning); }
+.stat-card--amber::after,
+.stat-card--streak::after { background: var(--warning); }
 
 @media (hover: hover) {
   .stat-card:hover {
@@ -518,7 +479,8 @@
   .stat-card--green:hover  { border-color: rgba(63, 185, 80, 0.25); }
   .stat-card--blue:hover   { border-color: var(--accent-border); }
   .stat-card--purple:hover { border-color: rgba(188, 140, 255, 0.25); }
-  .stat-card--amber:hover  { border-color: rgba(210, 153, 34, 0.25); }
+  .stat-card--amber:hover,
+  .stat-card--streak:hover { border-color: rgba(210, 153, 34, 0.25); }
 
   .stat-card:hover .stat-card-icon-wrap {
     transform: scale(1.08);
@@ -534,12 +496,6 @@
   justify-content: center;
   flex-shrink: 0;
   transition: transform 0.2s ease;
-}
-
-@media (hover: hover) {
-  .stat-card:hover .stat-card-icon-wrap {
-    transform: scale(1.08);
-  }
 }
 
 .stat-card--green  .stat-card-icon-wrap { background: var(--success-bg);  color: var(--success); }
@@ -619,6 +575,7 @@
   margin-top: 0.35rem;
 }
 
+/* Redefine label for better consistency */
 .stat-card-label {
   font-size: 0.72rem;
   color: var(--text-secondary);
@@ -688,13 +645,6 @@
   border-bottom: 1px solid var(--border-secondary);
 }
 
-.dash-section-header .widget-title {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-bottom: 0;
-}
-
 /* ---- Top Repos Grid ---- */
 .top-repos-grid {
   display: grid;
@@ -734,7 +684,6 @@
     border-color: var(--accent-border);
     transform: translateY(-2px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 0 0 2px var(--accent-ring);
-    text-decoration: none;
   }
 
   .top-repo-card:hover::before {
@@ -749,7 +698,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  letter-spacing: -0.01em;
 }
 
 .top-repo-desc {
@@ -792,18 +740,6 @@
   gap: 0.25rem;
 }
 
-.top-repo-stat svg {
-  color: var(--text-tertiary);
-}
-
-.top-repos-empty {
-  grid-column: 1 / -1;
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  padding: 2rem;
-}
-
 /* ---- Shared ---- */
 .widget-title {
   font-size: 1rem;
@@ -825,7 +761,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 2.5rem 1.25rem 1.5rem; /* Added extra top padding to avoid hamburger overlap */
+    padding: 2.5rem 1.25rem 1.5rem;
   }
 
   .hero-card::before {

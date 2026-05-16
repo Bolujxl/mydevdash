@@ -1,4 +1,4 @@
-# DevDash
+# myDen
 
 Your personal developer command center — GitHub activity, task management, and weather in one dashboard.
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Zap, Sun, Moon, LayoutDashboard, GitBranch, ClipboardList, Activity, Menu, X } from 'lucide-react'
+import { Sun, Moon, LayoutDashboard, GitBranch, ClipboardList, Activity, Menu, X } from 'lucide-react'
 import { useTheme } from '../hooks/useTheme'
 import '../styles/Navbar.css'
 
@@ -28,11 +28,36 @@ function Navbar() {
         </button>
 
         <div className="sidebar-brand">
-          <div className="sidebar-logo-wrap">
-            <Zap size={18} />
-          </div>
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-label="myDen logo"
+            className="sidebar-logo-svg"
+          >
+            <rect width="40" height="40" rx="9" fill="#000d1a" />
+            <line x1="4" y1="14" x2="36" y2="14" stroke="#4a5568" strokeWidth="1" strokeLinecap="round" />
+            <line x1="7" y1="14" x2="7" y2="11.5" stroke="#4a5568" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="12" y1="14" x2="12" y2="12" stroke="#4a5568" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="17" y1="14" x2="17" y2="11.5" stroke="#4a5568" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="22" y1="14" x2="22" y2="12" stroke="#4a5568" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="27" y1="14" x2="27" y2="11.5" stroke="#4a5568" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="32" y1="14" x2="32" y2="12" stroke="#4a5568" strokeWidth="0.8" strokeLinecap="round" />
+            <rect x="5" y="14" width="30" height="22" rx="3" fill="#000912" stroke="#00a1e0" strokeWidth="1.2" />
+            <circle cx="15" cy="21" r="3" fill="currentColor" />
+            <rect x="13" y="24" width="4" height="6" rx="1.5" fill="currentColor" />
+            <rect x="13" y="28" width="2" height="4" rx="1" fill="currentColor" />
+            <rect x="15" y="28" width="2" height="4" rx="1" fill="currentColor" />
+            <rect x="21" y="23" width="3" height="9" rx="1" fill="#00a1e0" />
+            <rect x="23" y="25" width="3" height="7" rx="1" fill="#00a1e0" opacity="0.7" />
+            <rect x="25" y="28" width="3" height="4" rx="1" fill="#00a1e0" opacity="0.5" />
+            <polyline points="21,23 23,20 25,18" fill="none" stroke="#00a1e0" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" opacity="0.5" />
+          </svg>
           <div>
-            <div className="sidebar-title">DevDash</div>
+            <div className="app-name">
+              <span className="app-name-my">my</span>Den
+            </div>
             <div className="sidebar-version">v1.0</div>
           </div>
         </div>

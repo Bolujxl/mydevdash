@@ -20,11 +20,17 @@
 
 .heatmap-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
+}
+
+.heatmap-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .heatmap-title {
@@ -65,9 +71,9 @@
 }
 
 .heatmap-summary {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
 }
 
 .heatmap-grid-wrap {
@@ -77,18 +83,20 @@
   -webkit-overflow-scrolling: touch;
   width: 100%;
   min-width: 0;
+  display: flex;
 }
 
 .heatmap-grid {
   display: flex;
   gap: 0;
-  width: max-content; /* Instead of min-width: fit-content to strictly bound it */
+  width: max-content;
+  margin: 0 auto;
 }
 
 .heatmap-y-labels {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   margin-right: 0.5rem;
   padding-top: 0;
   position: sticky;
@@ -108,14 +116,14 @@
 
 .heatmap-cells-wrap {
   display: flex;
-  gap: 3px;
+  gap: 2px;
   min-width: fit-content;
 }
 
 .heatmap-week {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
 .heatmap-cell {
@@ -167,7 +175,7 @@
 .heatmap-legend {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 3px;
   font-size: 0.68rem;
   color: var(--text-muted);

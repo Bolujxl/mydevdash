@@ -63,7 +63,10 @@ function CommitHeatmap({ events }) {
   return (
     <div className="heatmap-card">
       <div className="heatmap-header">
-        <h2 className="heatmap-title">Commit Pulse</h2>
+        <div className="heatmap-title-wrap">
+          <h2 className="heatmap-title">Commit Pulse</h2>
+          <p className="heatmap-summary">{totalPushes} pushes in selected range</p>
+        </div>
         <div className="heatmap-range">
           {['30d', '3mo', '6mo', '1y'].map((r) => (
             <button
@@ -76,7 +79,6 @@ function CommitHeatmap({ events }) {
           ))}
         </div>
       </div>
-      <p className="heatmap-summary">{totalPushes} pushes in selected range</p>
 
       <div className="heatmap-grid-wrap">
         <div className="heatmap-grid">
