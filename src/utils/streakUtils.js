@@ -47,11 +47,17 @@ export function recalcStreak(completedTasks, events) {
 function checkActiveToday(completedTasks, events) {
   const today = todayStr()
 
-  if (completedTasks > 0) return true
+  if (completedTasks > 0) {
+    try {
+      const tasks = JSON.parse(localStorage.getItem('devdash_tasks')) || []
+      const doneToday = tasks.filter((t) => t.done && t.createdAt?.slice(0, 10) === today).length
+      if (doneToday > 0) return true
+    } catch { /* noop */ }
+  }
 
   if (Array.isArray(events)) {
     for (const e of events) {
-      if (e.type === 'PushEvent' && e.created_at?.slice(0, 10) === today) {
+      if (e.created_at?.slice(0, 10) === today) {
         return true
       }
     }
